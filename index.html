@@ -1,14 +1,96 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가문 자산 관리 시스템 | Family Asset Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-vault"></i>
+                <span>가문 자산 관리</span>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-home"></i> 대시보드</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> 자산 분석</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> 구성원 현황</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> 설정</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="theme-toggle"><i class="fas fa-moon"></i> 테마 전환</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>가계 자산 총괄 대시보드</h1>
+                <div class="user-info">
+                    <span>환영합니다, <strong>사용자</strong>님</span>
+                </div>
+            </header>
+
+            <!-- Summary Cards -->
+            <section class="summary-cards">
+                <div class="card total-asset">
+                    <h3>총 가문 자산</h3>
+                    <p id="total-family-asset">0원</p>
+                    <span class="trend up"><i class="fas fa-arrow-up"></i> 2.5%</span>
+                </div>
+                <div class="card my-asset">
+                    <h3>나의 순자산</h3>
+                    <p id="my-asset-value">0원</p>
+                    <span class="trend">내 비중: <span id="my-ratio">0%</span></span>
+                </div>
+                <div class="card member-count">
+                    <h3>관리 구성원</h3>
+                    <p>5명</p>
+                    <span>부, 모, 나, 동생1, 동생2</span>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="charts-row">
+                <div class="chart-container">
+                    <h3>구성원별 자산 비중</h3>
+                    <canvas id="memberChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>자산 유형별 분포</h3>
+                    <canvas id="assetTypeChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Asset Table -->
+            <section class="asset-list">
+                <h3>구성원별 상세 자산 목록</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>구성원</th>
+                                <th>현금성 자산</th>
+                                <th>부동산</th>
+                                <th>주식/채권</th>
+                                <th>총계</th>
+                            </tr>
+                        </thead>
+                        <tbody id="asset-table-body">
+                            <!-- JS로 렌더링 -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>
