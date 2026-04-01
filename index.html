@@ -3,94 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>가문 자산 관리 시스템 | Family Asset Manager</title>
+    <title>우리가문 자산 관리 및 세금 계산기</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="app-container">
-        <!-- Sidebar -->
+    <header class="header">
+        <div class="header-inner">
+            <h1>👑 우리가문 자산 현황 & 세금 계산기</h1>
+            <p>가족 구성원별 자산을 체계적으로 관리하고 세금을 예측해보세요.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar: Family Tree -->
         <aside class="sidebar">
-            <div class="logo">
-                <i class="fas fa-vault"></i>
-                <span>가문 자산 관리</span>
-            </div>
-            <nav>
-                <ul>
-                    <li class="active"><a href="#"><i class="fas fa-home"></i> 대시보드</a></li>
-                    <li><a href="#"><i class="fas fa-chart-line"></i> 자산 분석</a></li>
-                    <li><a href="#"><i class="fas fa-users"></i> 구성원 현황</a></li>
-                    <li><a href="#"><i class="fas fa-cog"></i> 설정</a></li>
-                </ul>
-            </nav>
-            <div class="sidebar-footer">
-                <button id="theme-toggle"><i class="fas fa-moon"></i> 테마 전환</button>
-            </div>
+            <h2 class="sidebar-title">👨‍👩‍👧‍👦 가족 구성원</h2>
+            <ul class="family-tree" id="family-list">
+                <!-- Family members will be dynamically added here -->
+            </ul>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
-            <header>
-                <h1>가계 자산 총괄 대시보드</h1>
-                <div class="user-info">
-                    <span>환영합니다, <strong>사용자</strong>님</span>
+            <!-- Dashboard (Overview) -->
+            <section id="dashboard-section" class="panel active">
+                <h2 class="panel-title">📊 가문 총 자산 대시보드</h2>
+                <div class="summary-cards">
+                    <div class="card">
+                        <h3>총 자산 (부동산 + 금융)</h3>
+                        <p id="total-gross-assets">0원</p>
+                    </div>
+                    <div class="card warning">
+                        <h3>총 부채</h3>
+                        <p id="total-debt">0원</p>
+                    </div>
+                    <div class="card primary">
+                        <h3>순 자산</h3>
+                        <p id="total-net-assets">0원</p>
+                    </div>
                 </div>
-            </header>
-
-            <!-- Summary Cards -->
-            <section class="summary-cards">
-                <div class="card total-asset">
-                    <h3>총 가문 자산</h3>
-                    <p id="total-family-asset">0원</p>
-                    <span class="trend up"><i class="fas fa-arrow-up"></i> 2.5%</span>
-                </div>
-                <div class="card my-asset">
-                    <h3>나의 순자산</h3>
-                    <p id="my-asset-value">0원</p>
-                    <span class="trend">내 비중: <span id="my-ratio">0%</span></span>
-                </div>
-                <div class="card member-count">
-                    <h3>관리 구성원</h3>
-                    <p>5명</p>
-                    <span>부, 모, 나, 동생1, 동생2</span>
+                
+                <div class="chart-container">
+                    <h3>가족 구성원별 순자산 비율</h3>
+                    <div id="asset-bars" class="asset-bars">
+                        <!-- Bars will be generated here -->
+                    </div>
                 </div>
             </section>
 
-            <!-- Charts Section -->
-            <section class="charts-row">
-                <div class="chart-container">
-                    <h3>구성원별 자산 비중</h3>
-                    <canvas id="memberChart"></canvas>
+            <!-- Asset Input Section -->
+            <section id="asset-input-section" class="panel hidden">
+                <div class="panel-header">
+                    <h2 class="panel-title" id="selected-member-name">구성원 선택</h2>
+                    <button class="btn-back" onclick="showDashboard()">대시보드로 돌아가기</button>
                 </div>
-                <div class="chart-container">
-                    <h3>자산 유형별 분포</h3>
-                    <canvas id="assetTypeChart"></canvas>
-                </div>
+                
+                <form id="asset-form" class="asset-form">
+                    <div class="form-group">
+                        <label for="realEstate">🏢 부동산 (원)</label>
+                        <input type="number" id="realEstate" placeholder="예: 500000000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="cash">💰 현금 및 예적금 (원)</label>
+                        <input type="number" id="cash" placeholder="예: 50000000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="stock">📈 주식 및 기타 자산 (원)</label>
+                        <input type="number" id="stock" placeholder="예: 30000000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="debt">💳 부채 (원)</label>
+                        <input type="number" id="debt" placeholder="예: 100000000" min="0">
+                    </div>
+                    
+                    <div class="member-summary">
+                        <h3>순 자산: <span id="member-net-asset" class="highlight">0원</span></h3>
+                    </div>
+
+                    <button type="button" class="btn-save" onclick="saveAssets()">자산 저장하기</button>
+                </form>
             </section>
 
-            <!-- Asset Table -->
-            <section class="asset-list">
-                <h3>구성원별 상세 자산 목록</h3>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>구성원</th>
-                                <th>현금성 자산</th>
-                                <th>부동산</th>
-                                <th>주식/채권</th>
-                                <th>총계</th>
-                            </tr>
-                        </thead>
-                        <tbody id="asset-table-body">
-                            <!-- JS로 렌더링 -->
-                        </tbody>
-                    </table>
+            <!-- Tax Calculator Section -->
+            <section id="tax-section" class="panel">
+                <h2 class="panel-title">🧮 상속세 / 증여세 간편 계산기</h2>
+                <div class="tax-calculator">
+                    <div class="tax-input">
+                        <label for="tax-type">계산 종류</label>
+                        <select id="tax-type">
+                            <option value="inheritance">상속세 (부모님 전체 자산 기준)</option>
+                            <option value="gift">증여세 (특정인에게 증여)</option>
+                        </select>
+                    </div>
+
+                    <div class="tax-input" id="gift-target-wrapper" style="display: none;">
+                        <label for="gift-target">수증자 (받는 사람)</label>
+                        <select id="gift-target">
+                            <option value="adult_child">성인 자녀 (공제 5,000만원)</option>
+                            <option value="minor_child">미성년 자녀 (공제 2,000만원)</option>
+                            <option value="spouse">배우자 (공제 6억원)</option>
+                            <option value="grandchild">손주 (공제 5,000만원, 세대생략 할증)</option>
+                        </select>
+                    </div>
+
+                    <div class="tax-input">
+                        <label for="tax-amount">과세 대상 금액 (원)</label>
+                        <input type="number" id="tax-amount" placeholder="금액을 입력하세요">
+                        <button type="button" class="btn-calc" onclick="pullParentsAssets()">부모님 순자산 가져오기</button>
+                    </div>
+
+                    <button type="button" class="btn-save" style="width: 100%; margin-top: 15px;" onclick="calculateTax()">세금 계산하기</button>
+
+                    <div class="tax-result" id="tax-result-box" style="display: none;">
+                        <h3>예상 세금: <span id="estimated-tax" class="highlight-red">0원</span></h3>
+                        <p id="tax-detail" class="tax-detail"></p>
+                        <p class="notice">* 본 계산기는 2024년 기준 기본 공제액을 적용한 간편 계산기로, 실제 세금은 세무 전문가와 상담하시기 바랍니다. (상속세는 일괄공제 5억 + 배우자공제 5억 = 최소 10억 공제 가정)</p>
+                    </div>
                 </div>
             </section>
         </main>
     </div>
+
     <script src="main.js"></script>
 </body>
 </html>
