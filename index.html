@@ -3,129 +3,554 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>우리가문 자산 관리 및 세금 계산기</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>우리가문 자산 관리 & 2026 세금 시뮬레이터</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; }
+        .chart-container { position: relative; height: 300px; width: 100%; }
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    </style>
 </head>
-<body>
-    <header class="header">
-        <div class="header-inner">
-            <h1>👑 우리가문 자산 현황 & 세금 계산기</h1>
-            <p>가족 구성원별 자산을 체계적으로 관리하고 세금을 예측해보세요.</p>
+<body class="text-slate-800">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">👑</span>
+                <h1 class="text-xl font-bold text-blue-900 tracking-tight">우리가문 자산 시뮬레이터 <span class="text-sm font-medium text-blue-500 bg-blue-50 px-2 py-0.5 rounded-full ml-2">2026 Edition</span></h1>
+            </div>
+            <button onclick="resetData()" class="text-sm text-slate-400 hover:text-red-500 transition-colors">데이터 초기화</button>
         </div>
     </header>
 
-    <div class="container">
-        <!-- Sidebar: Family Tree -->
-        <aside class="sidebar">
-            <h2 class="sidebar-title">👨‍👩‍👧‍👦 가족 구성원</h2>
-            <ul class="family-tree" id="family-list">
-                <!-- Family members will be dynamically added here -->
-            </ul>
-        </aside>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left: Sidebar & Family List -->
+            <aside class="lg:col-span-4 space-y-6">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                    <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        👨‍👩‍👧‍👦 가문 구성원 <span id="member-count" class="text-xs font-normal text-slate-400">0명</span>
+                    </h2>
+                    <div id="family-list" class="space-y-3 mb-6">
+                        <!-- Members injected here -->
+                    </div>
+                    <button onclick="openAddMemberModal()" class="w-full py-3 border-2 border-dashed border-slate-200 rounded-xl text-slate-500 font-medium hover:border-blue-400 hover:text-blue-500 transition-all flex items-center justify-center gap-2">
+                        <span>+</span> 구성원 추가하기
+                    </button>
+                </div>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Dashboard (Overview) -->
-            <section id="dashboard-section" class="panel active">
-                <h2 class="panel-title">📊 가문 총 자산 대시보드</h2>
-                <div class="summary-cards">
-                    <div class="card">
-                        <h3>총 자산 (부동산 + 금융)</h3>
-                        <p id="total-gross-assets">0원</p>
-                    </div>
-                    <div class="card warning">
-                        <h3>총 부채</h3>
-                        <p id="total-debt">0원</p>
-                    </div>
-                    <div class="card primary">
-                        <h3>순 자산</h3>
-                        <p id="total-net-assets">0원</p>
+                <!-- Summary Card -->
+                <div class="bg-blue-900 rounded-2xl shadow-lg p-6 text-white">
+                    <h3 class="text-blue-200 text-sm font-medium mb-1">가문 합산 순자산</h3>
+                    <p id="family-total-net" class="text-3xl font-extrabold mb-4">0원</p>
+                    <div class="space-y-2 text-sm opacity-80">
+                        <div class="flex justify-between"><span>총 부동산</span> <span id="total-re-val">0원</span></div>
+                        <div class="flex justify-between"><span>총 금융자산</span> <span id="total-fin-val">0원</span></div>
+                        <div class="flex justify-between text-red-300"><span>총 부채</span> <span id="total-debt-val">0원</span></div>
                     </div>
                 </div>
-                
-                <div class="chart-container">
-                    <h3>가족 구성원별 순자산 비율</h3>
-                    <div id="asset-bars" class="asset-bars">
-                        <!-- Bars will be generated here -->
-                    </div>
-                </div>
-            </section>
+            </aside>
 
-            <!-- Asset Input Section -->
-            <section id="asset-input-section" class="panel hidden">
-                <div class="panel-header">
-                    <h2 class="panel-title" id="selected-member-name">구성원 선택</h2>
-                    <button class="btn-back" onclick="showDashboard()">대시보드로 돌아가기</button>
-                </div>
+            <!-- Right: Content Area -->
+            <div class="lg:col-span-8 space-y-8">
                 
-                <form id="asset-form" class="asset-form">
-                    <div class="form-group">
-                        <label for="realEstate">🏢 부동산 (원)</label>
-                        <input type="number" id="realEstate" placeholder="예: 500000000" min="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="cash">💰 현금 및 예적금 (원)</label>
-                        <input type="number" id="cash" placeholder="예: 50000000" min="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="stock">📈 주식 및 기타 자산 (원)</label>
-                        <input type="number" id="stock" placeholder="예: 30000000" min="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="debt">💳 부채 (원)</label>
-                        <input type="number" id="debt" placeholder="예: 100000000" min="0">
+                <!-- Section 1: Asset Input (Dynamic) -->
+                <section id="input-section" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 id="edit-title" class="text-2xl font-bold text-slate-900 underline decoration-blue-500 decoration-4 underline-offset-8">구성원 자산 편집</h2>
+                        <button onclick="closeInputSection()" class="text-slate-400 hover:text-slate-600">닫기</button>
                     </div>
                     
-                    <div class="member-summary">
-                        <h3>순 자산: <span id="member-net-asset" class="highlight">0원</span></h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <h3 class="font-bold text-slate-700 flex items-center gap-2">🏢 부동산 자산</h3>
+                            <div>
+                                <label class="text-xs text-slate-500 mb-1 block">공시지가 (세금 계산 기준)</label>
+                                <input type="number" id="in-official-price" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="0">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-500 mb-1 block">실거래가 (시세)</label>
+                                <input type="number" id="in-market-price" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <h3 class="font-bold text-slate-700 flex items-center gap-2">💰 금융/기타 자산</h3>
+                            <div>
+                                <label class="text-xs text-slate-500 mb-1 block">예적금 및 현금</label>
+                                <input type="number" id="in-cash" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="0">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-500 mb-1 block">주식 / ETF / 채권</label>
+                                <input type="number" id="in-stock" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="0">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-500 mb-1 block">부채 (대출 등)</label>
+                                <input type="number" id="in-debt" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-red-500 outline-none text-red-600" placeholder="0">
+                            </div>
+                        </div>
                     </div>
-
-                    <button type="button" class="btn-save" onclick="saveAssets()">자산 저장하기</button>
-                </form>
-            </section>
-
-            <!-- Tax Calculator Section -->
-            <section id="tax-section" class="panel">
-                <h2 class="panel-title">🧮 상속세 / 증여세 간편 계산기</h2>
-                <div class="tax-calculator">
-                    <div class="tax-input">
-                        <label for="tax-type">계산 종류</label>
-                        <select id="tax-type">
-                            <option value="inheritance">상속세 (부모님 전체 자산 기준)</option>
-                            <option value="gift">증여세 (특정인에게 증여)</option>
-                        </select>
+                    <div class="mt-8 flex gap-3">
+                        <button onclick="saveAssetData()" class="flex-1 bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-shadow shadow-md active:transform active:scale-[0.98]">자산 정보 저장</button>
+                        <button onclick="deleteMember()" id="btn-delete-member" class="px-6 bg-red-50 text-red-600 font-bold rounded-xl hover:bg-red-100 transition-colors">삭제</button>
                     </div>
+                </section>
 
-                    <div class="tax-input" id="gift-target-wrapper" style="display: none;">
-                        <label for="gift-target">수증자 (받는 사람)</label>
-                        <select id="gift-target">
-                            <option value="adult_child">성인 자녀 (공제 5,000만원)</option>
-                            <option value="minor_child">미성년 자녀 (공제 2,000만원)</option>
-                            <option value="spouse">배우자 (공제 6억원)</option>
-                            <option value="grandchild">손주 (공제 5,000만원, 세대생략 할증)</option>
-                        </select>
+                <!-- Section 2: Dashboard -->
+                <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                        <h3 class="font-bold text-slate-900 mb-4">📊 자산 구성 비중</h3>
+                        <div class="chart-container">
+                            <canvas id="assetDoughnutChart"></canvas>
+                        </div>
                     </div>
-
-                    <div class="tax-input">
-                        <label for="tax-amount">과세 대상 금액 (원)</label>
-                        <input type="number" id="tax-amount" placeholder="금액을 입력하세요">
-                        <button type="button" class="btn-calc" onclick="pullParentsAssets()">부모님 순자산 가져오기</button>
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                        <h3 class="font-bold text-slate-900 mb-4">👨‍👩‍👧 구성원별 자산 현황</h3>
+                        <div class="chart-container">
+                            <canvas id="memberBarChart"></canvas>
+                        </div>
                     </div>
+                </section>
 
-                    <button type="button" class="btn-save" style="width: 100%; margin-top: 15px;" onclick="calculateTax()">세금 계산하기</button>
-
-                    <div class="tax-result" id="tax-result-box" style="display: none;">
-                        <h3>예상 세금: <span id="estimated-tax" class="highlight-red">0원</span></h3>
-                        <p id="tax-detail" class="tax-detail"></p>
-                        <p class="notice">* 본 계산기는 2024년 기준 기본 공제액을 적용한 간편 계산기로, 실제 세금은 세무 전문가와 상담하시기 바랍니다. (상속세는 일괄공제 5억 + 배우자공제 5억 = 최소 10억 공제 가정)</p>
+                <!-- Section 3: Tax Simulator -->
+                <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-900 p-6 text-white">
+                        <h2 class="text-xl font-bold flex items-center gap-2">🧮 2026 세금 시뮬레이션</h2>
+                        <p class="text-slate-400 text-sm mt-1 text-balance">선택한 구성원의 자산을 기준으로 상속/증여 시 발생할 세금을 예측합니다.</p>
                     </div>
+                    <div class="p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">계산 대상자</label>
+                                <select id="tax-member-select" onchange="updateTaxSimulation()" class="w-full border border-slate-200 rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                                    <option value="">구성원을 선택하세요</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">시뮬레이션 종류</label>
+                                <div class="flex p-1 bg-slate-100 rounded-lg">
+                                    <button onclick="setTaxType('inheritance')" id="btn-type-inh" class="flex-1 py-2 rounded-md font-bold text-sm transition-all bg-white shadow text-blue-600">상속세</button>
+                                    <button onclick="setTaxType('gift')" id="btn-type-gift" class="flex-1 py-2 rounded-md font-bold text-sm transition-all text-slate-500">증여세</button>
+                                </div>
+                            </div>
+                            <div id="gift-target-box" class="invisible">
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">증여 받는 사람</label>
+                                <select id="gift-target-type" onchange="updateTaxSimulation()" class="w-full border border-slate-200 rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                                    <option value="spouse">배우자 (6억 공제)</option>
+                                    <option value="child_adult" selected>성인 자녀 (5천만 공제)</option>
+                                    <option value="child_minor">미성년 자녀 (2천만 공제)</option>
+                                    <option value="other">기타 친족 (1천만 공제)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Result Display -->
+                        <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100">
+                            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                                <div class="text-center md:text-left">
+                                    <span id="res-tax-label" class="text-slate-500 font-medium">예상 상속세액</span>
+                                    <p id="res-tax-amount" class="text-4xl font-black text-blue-600 mt-1">0원</p>
+                                </div>
+                                <div class="h-px md:h-12 w-full md:w-px bg-slate-200"></div>
+                                <div class="text-center md:text-left">
+                                    <span class="text-slate-500 font-medium">세후 수령액 (순자산)</span>
+                                    <p id="res-after-tax" class="text-4xl font-black text-slate-900 mt-1">0원</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 pt-8 border-t border-slate-200">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 text-center">계산 상세 근거</h4>
+                                <div id="tax-details" class="space-y-3 text-sm text-slate-600">
+                                    <!-- Details injected here -->
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-[10px] text-slate-400 mt-6 leading-relaxed">* 본 계산기는 2026년 시행 예정 또는 현행 상속·증여세법에 기초한 간편 시뮬레이션입니다. 실제 세금은 개별 상황(동거주택공제, 채무 종류, 과거 증여 재산 합산 등)에 따라 크게 달라질 수 있으므로 반드시 세무 전문가와 상담하시기 바랍니다.</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Adding Member -->
+    <div id="add-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl w-full max-w-md p-8 shadow-2xl scale-95 transition-transform" id="modal-content">
+            <h2 class="text-2xl font-bold text-slate-900 mb-6">새로운 구성원 추가</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">이름</label>
+                    <input type="text" id="new-name" class="w-full border border-slate-200 rounded-xl p-4 outline-none focus:ring-2 focus:ring-blue-500" placeholder="예: 아버지, 나, 첫째 아들">
                 </div>
-            </section>
-        </main>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">역할</label>
+                    <select id="new-role" class="w-full border border-slate-200 rounded-xl p-4 outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                        <option value="parent">부모 (세대주)</option>
+                        <option value="me">나</option>
+                        <option value="spouse">배우자</option>
+                        <option value="child">자녀</option>
+                        <option value="other">기타</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-8 flex gap-3">
+                <button onclick="closeAddMemberModal()" class="flex-1 py-4 text-slate-500 font-bold hover:bg-slate-50 rounded-xl transition-colors">취소</button>
+                <button onclick="addMember()" class="flex-[2] py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all">구성원 생성</button>
+            </div>
+        </div>
     </div>
 
-    <script src="main.js"></script>
+    <script>
+        // --- State Management ---
+        let family = JSON.parse(localStorage.getItem('family_data')) || [
+            { id: 'f_1', name: '아버지', role: 'parent', assets: { official: 1200000000, market: 1800000000, cash: 200000000, stock: 150000000, debt: 300000000 } },
+            { id: 'f_2', name: '어머니', role: 'parent', assets: { official: 500000000, market: 800000000, cash: 100000000, stock: 50000000, debt: 0 } }
+        ];
+        let currentEditingId = null;
+        let taxType = 'inheritance'; // or 'gift'
+        
+        // Charts
+        let doughnutChart = null;
+        let barChart = null;
+
+        // --- Initialization ---
+        window.onload = () => {
+            renderFamily();
+            updateDashboard();
+            initCharts();
+        };
+
+        function saveState() {
+            localStorage.setItem('family_data', JSON.stringify(family));
+            updateDashboard();
+            updateCharts();
+        }
+
+        function formatKRW(num) {
+            if (num === 0) return '0원';
+            if (Math.abs(num) >= 100000000) {
+                const eok = Math.floor(num / 100000000);
+                const man = Math.floor((num % 100000000) / 10000);
+                return (eok > 0 ? eok + '억 ' : '') + (man > 0 ? man.toLocaleString() + '만' : '') + '원';
+            }
+            return num.toLocaleString() + '원';
+        }
+
+        // --- Family Management ---
+        function renderFamily() {
+            const list = document.getElementById('family-list');
+            const select = document.getElementById('tax-member-select');
+            list.innerHTML = '';
+            
+            // Backup selection
+            const currentSelected = select.value;
+            select.innerHTML = '<option value="">구성원을 선택하세요</option>';
+
+            family.forEach(m => {
+                const net = (m.assets.official + m.assets.cash + m.assets.stock) - m.assets.debt;
+                
+                // Sidebar List
+                const div = document.createElement('div');
+                div.className = `group flex items-center justify-between p-4 rounded-xl border transition-all cursor-pointer ${currentEditingId === m.id ? 'border-blue-500 bg-blue-50' : 'border-slate-100 bg-white hover:border-blue-200 shadow-sm'}`;
+                div.onclick = () => openEditSection(m.id);
+                div.innerHTML = `
+                    <div class="flex flex-col">
+                        <span class="font-bold text-slate-800">${m.name}</span>
+                        <span class="text-xs text-slate-400">${m.role === 'parent' ? '부모' : m.role === 'child' ? '자녀' : '기타'}</span>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-blue-600">${formatKRW(net)}</p>
+                        <p class="text-[10px] text-slate-400 uppercase">순자산</p>
+                    </div>
+                `;
+                list.appendChild(div);
+
+                // Tax Select Box
+                const opt = document.createElement('option');
+                opt.value = m.id;
+                opt.textContent = `${m.name} (${formatKRW(net)})`;
+                if (m.id === currentSelected) opt.selected = true;
+                select.appendChild(opt);
+            });
+
+            document.getElementById('member-count').textContent = family.length + '명';
+        }
+
+        function openAddMemberModal() {
+            document.getElementById('add-modal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('modal-content').classList.remove('scale-95'), 10);
+        }
+
+        function closeAddMemberModal() {
+            document.getElementById('modal-content').classList.add('scale-95');
+            setTimeout(() => document.getElementById('add-modal').classList.add('hidden'), 200);
+        }
+
+        function addMember() {
+            const name = document.getElementById('new-name').value;
+            const role = document.getElementById('new-role').value;
+            if (!name) return alert('이름을 입력해주세요.');
+
+            const newMember = {
+                id: 'f_' + Date.now(),
+                name: name,
+                role: role,
+                assets: { official: 0, market: 0, cash: 0, stock: 0, debt: 0 }
+            };
+
+            family.push(newMember);
+            saveState();
+            renderFamily();
+            closeAddMemberModal();
+            openEditSection(newMember.id);
+            document.getElementById('new-name').value = '';
+        }
+
+        function openEditSection(id) {
+            currentEditingId = id;
+            const m = family.find(x => x.id === id);
+            document.getElementById('input-section').classList.remove('hidden');
+            document.getElementById('edit-title').textContent = `${m.name}님의 자산 편집`;
+            
+            document.getElementById('in-official-price').value = m.assets.official || '';
+            document.getElementById('in-market-price').value = m.assets.market || '';
+            document.getElementById('in-cash').value = m.assets.cash || '';
+            document.getElementById('in-stock').value = m.assets.stock || '';
+            document.getElementById('in-debt').value = m.assets.debt || '';
+            
+            renderFamily();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closeInputSection() {
+            currentEditingId = null;
+            document.getElementById('input-section').classList.add('hidden');
+            renderFamily();
+        }
+
+        function saveAssetData() {
+            const m = family.find(x => x.id === currentEditingId);
+            m.assets.official = Number(document.getElementById('in-official-price').value);
+            m.assets.market = Number(document.getElementById('in-market-price').value);
+            m.assets.cash = Number(document.getElementById('in-cash').value);
+            m.assets.stock = Number(document.getElementById('in-stock').value);
+            m.assets.debt = Number(document.getElementById('in-debt').value);
+            
+            saveState();
+            renderFamily();
+            updateTaxSimulation();
+            closeInputSection();
+        }
+
+        function deleteMember() {
+            if (!confirm('정말 삭제하시겠습니까?')) return;
+            family = family.filter(x => x.id !== currentEditingId);
+            saveState();
+            renderFamily();
+            closeInputSection();
+        }
+
+        function resetData() {
+            if (confirm('모든 데이터가 초기화됩니다. 계속하시겠습니까?')) {
+                localStorage.removeItem('family_data');
+                location.reload();
+            }
+        }
+
+        // --- Dashboard & Calculations ---
+        function updateDashboard() {
+            let totalRe = 0, totalFin = 0, totalDebt = 0;
+            family.forEach(m => {
+                totalRe += m.assets.market;
+                totalFin += (m.assets.cash + m.assets.stock);
+                totalDebt += m.assets.debt;
+            });
+
+            document.getElementById('family-total-net').textContent = formatKRW((totalRe + totalFin) - totalDebt);
+            document.getElementById('total-re-val').textContent = formatKRW(totalRe);
+            document.getElementById('total-fin-val').textContent = formatKRW(totalFin);
+            document.getElementById('total-debt-val').textContent = formatKRW(totalDebt);
+        }
+
+        // --- Tax Simulation Logic (2026 Korea) ---
+        function setTaxType(type) {
+            taxType = type;
+            const btnInh = document.getElementById('btn-type-inh');
+            const btnGift = document.getElementById('btn-type-gift');
+            const giftBox = document.getElementById('gift-target-box');
+
+            if (type === 'inheritance') {
+                btnInh.className = 'flex-1 py-2 rounded-md font-bold text-sm transition-all bg-white shadow text-blue-600';
+                btnGift.className = 'flex-1 py-2 rounded-md font-bold text-sm transition-all text-slate-500';
+                giftBox.classList.add('invisible');
+                document.getElementById('res-tax-label').textContent = '예상 상속세액';
+            } else {
+                btnGift.className = 'flex-1 py-2 rounded-md font-bold text-sm transition-all bg-white shadow text-blue-600';
+                btnInh.className = 'flex-1 py-2 rounded-md font-bold text-sm transition-all text-slate-500';
+                giftBox.classList.remove('invisible');
+                document.getElementById('res-tax-label').textContent = '예상 증여세액';
+            }
+            updateTaxSimulation();
+        }
+
+        function calculateProgressiveTax(taxableBase) {
+            if (taxableBase <= 0) return 0;
+            
+            // Korea Tax Rates (Progressive)
+            if (taxableBase <= 100000000) return taxableBase * 0.1;
+            if (taxableBase <= 500000000) return taxableBase * 0.2 - 10000000;
+            if (taxableBase <= 1000000000) return taxableBase * 0.3 - 60000000;
+            if (taxableBase <= 3000000000) return taxableBase * 0.4 - 160000000;
+            return taxableBase * 0.5 - 460000000;
+        }
+
+        function updateTaxSimulation() {
+            const memberId = document.getElementById('tax-member-select').value;
+            const resTax = document.getElementById('res-tax-amount');
+            const resAfter = document.getElementById('res-after-tax');
+            const details = document.getElementById('tax-details');
+
+            if (!memberId) {
+                resTax.textContent = '0원';
+                resAfter.textContent = '0원';
+                details.innerHTML = '<p class="text-center py-4 opacity-50">구성원을 선택하면 상세 계산 내역이 표시됩니다.</p>';
+                return;
+            }
+
+            const m = family.find(x => x.id === memberId);
+            const totalGross = m.assets.official + m.assets.cash + m.assets.stock;
+            const netAsset = totalGross - m.assets.debt;
+            
+            let tax = 0;
+            let log = [];
+
+            if (taxType === 'inheritance') {
+                // 1. Inheritance Logic
+                log.push(`• 과세가액 합계: ${formatKRW(totalGross)}`);
+                log.push(`• 채무 및 공과금: -${formatKRW(m.assets.debt)}`);
+                
+                // Deductions
+                let totalDeduction = 0;
+                // Lump-sum (일괄공제 5억)
+                const basicDeduction = 500000000; 
+                totalDeduction += basicDeduction;
+                log.push(`• 일괄공제: -${formatKRW(basicDeduction)}`);
+                
+                // Spouse (배우자공제 - 최소 5억 가정)
+                const spouseDeduction = 500000000;
+                totalDeduction += spouseDeduction;
+                log.push(`• 배우자공제: -${formatKRW(spouseDeduction)} (최소액 가정)`);
+                
+                // Financial Asset Deduction (금융재산공제)
+                const finNet = (m.assets.cash + m.assets.stock) - m.assets.debt;
+                let finDeduction = 0;
+                if (finNet > 20000000) {
+                    finDeduction = Math.min(finNet * 0.2, 200000000);
+                } else if (finNet > 0) {
+                    finDeduction = finNet;
+                }
+                totalDeduction += finDeduction;
+                if (finDeduction > 0) log.push(`• 금융재산공제: -${formatKRW(finDeduction)}`);
+
+                const taxableBase = Math.max(0, netAsset - totalDeduction);
+                log.push(`<span class="font-bold text-slate-800 tracking-tight">▶ 과세표준: ${formatKRW(taxableBase)}</span>`);
+                
+                tax = calculateProgressiveTax(taxableBase);
+                log.push(`• 산출세액: ${formatKRW(tax)}`);
+                
+            } else {
+                // 2. Gift Logic
+                const target = document.getElementById('gift-target-type').value;
+                let giftDeduction = 0;
+                if (target === 'spouse') giftDeduction = 600000000;
+                else if (target === 'child_adult') giftDeduction = 50000000;
+                else if (target === 'child_minor') giftDeduction = 20000000;
+                else giftDeduction = 10000000;
+
+                log.push(`• 증여재산가액: ${formatKRW(netAsset)}`);
+                log.push(`• 증여재산공제: -${formatKRW(giftDeduction)}`);
+                
+                const taxableBase = Math.max(0, netAsset - giftDeduction);
+                log.push(`<span class="font-bold text-slate-800 tracking-tight">▶ 과세표준: ${formatKRW(taxableBase)}</span>`);
+                
+                tax = calculateProgressiveTax(taxableBase);
+                log.push(`• 산출세액: ${formatKRW(tax)}`);
+            }
+
+            resTax.textContent = formatKRW(tax);
+            resAfter.textContent = formatKRW(netAsset - tax);
+            
+            details.innerHTML = log.map(l => `<div class="flex justify-between border-b border-slate-50 pb-1"><span>${l.split(':')[0]}</span><span class="font-medium">${l.split(':')[1] || ''}</span></div>`).join('');
+        }
+
+        // --- Charts ---
+        function initCharts() {
+            const ctxD = document.getElementById('assetDoughnutChart').getContext('2d');
+            doughnutChart = new Chart(ctxD, {
+                type: 'doughnut',
+                data: {
+                    labels: ['부동산', '현금/예금', '주식/ETF', '부채'],
+                    datasets: [{
+                        data: [0, 0, 0, 0],
+                        backgroundColor: ['#1e3a8a', '#3b82f6', '#93c5fd', '#ef4444'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } },
+                    cutout: '70%'
+                }
+            });
+
+            const ctxB = document.getElementById('memberBarChart').getContext('2d');
+            barChart = new Chart(ctxB, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: '순자산',
+                        data: [],
+                        backgroundColor: '#3b82f6',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { callback: v => v / 100000000 + '억' } }
+                    }
+                }
+            });
+            updateCharts();
+        }
+
+        function updateCharts() {
+            if (!doughnutChart || !barChart) return;
+
+            let re = 0, cash = 0, stock = 0, debt = 0;
+            family.forEach(m => {
+                re += m.assets.market;
+                cash += m.assets.cash;
+                stock += m.assets.stock;
+                debt += m.assets.debt;
+            });
+
+            doughnutChart.data.datasets[0].data = [re, cash, stock, debt];
+            doughnutChart.update();
+
+            barChart.data.labels = family.map(m => m.name);
+            barChart.data.datasets[0].data = family.map(m => (m.assets.market + m.assets.cash + m.assets.stock) - m.assets.debt);
+            barChart.update();
+        }
+
+    </script>
 </body>
 </html>
