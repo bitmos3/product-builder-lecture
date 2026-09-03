@@ -582,56 +582,144 @@
         
         // Default seed data with rich itemized items for initial presentation
         const defaultFamily = [
-            { 
-                id: 'f_1', 
-                name: '아버지', 
-                role: 'parent', 
-                itemizedAssets: {
-                    realEstate: [
-                        { id: 're_1', label: '마포 대장 아파트 (실거주)', official: 1200000000, market: 1800000000 },
-                        { id: 're_2', label: '제주도 요양 토지', official: 150000000, market: 200000000 }
-                    ],
-                    financial: [
-                        { id: 'fi_1', label: '국민은행 정기적금', type: 'cash', value: 150000000 },
-                        { id: 'fi_2', label: '삼성전자 주식 포트폴리오', type: 'stock', value: 100000000 },
-                        { id: 'fi_3', label: '해외 테크 ETF', type: 'stock', value: 50000000 }
-                    ],
-                    debt: [
-                        { id: 'de_1', label: '주택담보대출', value: 300000000 }
-                    ]
-                }
-            },
-            { 
-                id: 'f_2', 
-                name: '어머니', 
-                role: 'parent', 
-                itemizedAssets: {
-                    realEstate: [
-                        { id: 're_3', label: '분당 오피스텔', official: 400000000, market: 550000000 }
-                    ],
-                    financial: [
-                        { id: 'fi_4', label: '신한은행 비상금예금', type: 'cash', value: 80000000 },
-                        { id: 'fi_5', label: '코스피 배당주 투자', type: 'stock', value: 20000000 }
-                    ],
-                    debt: []
-                }
-            },
-            {
-                id: 'f_3',
-                name: '나 (본인)',
-                role: 'me',
-                itemizedAssets: {
-                    realEstate: [],
-                    financial: [
-                        { id: 'fi_6', label: '토스 저축 계좌', type: 'cash', value: 40000000 },
-                        { id: 'fi_7', label: '미국 기술주 우량주', type: 'stock', value: 30000000 }
-                    ],
-                    debt: [
-                        { id: 'de_2', label: '카카오 마이너스 통장', value: 20000000 }
-                    ]
-                }
-            }
-        ];
+  {
+    "id": "f_1",
+    "name": "아버지",
+    "role": "parent",
+    "itemizedAssets": {
+      "realEstate": [
+        {
+          "id": "item_1788228406365",
+          "label": "응봉동 대림 1차 아파트",
+          "official": 1250000000,
+          "market": 2500000000
+        },
+        {
+          "id": "item_1788228778414",
+          "label": "부산시 부산진구 초읍동 128-1",
+          "official": 700000000,
+          "market": 1000000000
+        }
+      ],
+      "financial": [
+        {
+          "id": "fi_1",
+          "label": "국민은행 정기적금",
+          "type": "cash",
+          "value": 150000000
+        },
+        {
+          "id": "fi_2",
+          "label": "삼성전자 주식 포트폴리오",
+          "type": "stock",
+          "value": 100000000
+        },
+        {
+          "id": "fi_3",
+          "label": "해외 테크 ETF",
+          "type": "stock",
+          "value": 50000000
+        }
+      ],
+      "debt": [
+        {
+          "id": "de_1",
+          "label": "주택담보대출",
+          "value": 300000000
+        }
+      ]
+    }
+  },
+  {
+    "id": "f_2",
+    "name": "어머니",
+    "role": "parent",
+    "itemizedAssets": {
+      "realEstate": [
+        {
+          "id": "re_3",
+          "label": "분당 오피스텔",
+          "official": 400000000,
+          "market": 550000000
+        },
+        {
+          "id": "item_1788228927397",
+          "label": "서울시 강남구 삼성동 48-2",
+          "official": 5000000000,
+          "market": 10000000000
+        }
+      ],
+      "financial": [
+        {
+          "id": "fi_4",
+          "label": "신한은행 비상금예금",
+          "type": "cash",
+          "value": 80000000
+        },
+        {
+          "id": "fi_5",
+          "label": "코스피 배당주 투자",
+          "type": "stock",
+          "value": 20000000
+        }
+      ],
+      "debt": []
+    }
+  },
+  {
+    "id": "f_3",
+    "name": "나 (본인)",
+    "role": "me",
+    "itemizedAssets": {
+      "realEstate": [
+        {
+          "id": "item_1788228035263",
+          "label": "광명역푸르지오아파트",
+          "official": 776000000,
+          "market": 1270000000
+        }
+      ],
+      "financial": [],
+      "debt": [
+        {
+          "id": "item_1788228103413",
+          "label": "내집마련디딤돌대출",
+          "value": 56777861
+        }
+      ]
+    }
+  },
+  {
+    "id": "f_1788231977278",
+    "name": "대영이",
+    "role": "spouse",
+    "itemizedAssets": {
+      "realEstate": [],
+      "financial": [],
+      "debt": []
+    }
+  },
+  {
+    "id": "f_1788231988311",
+    "name": "윤공이",
+    "role": "child",
+    "itemizedAssets": {
+      "realEstate": [],
+      "financial": [],
+      "debt": []
+    }
+  },
+  {
+    "id": "f_1788231998677",
+    "name": "이아가",
+    "role": "child",
+    "itemizedAssets": {
+      "realEstate": [],
+      "financial": [],
+      "debt": []
+    }
+  }
+];
 
         // Ensure backward compatibility migration
         if (!family) {
