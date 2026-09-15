@@ -562,15 +562,15 @@
                 <button onclick="closeExportModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">✕</button>
             </div>
             
-            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
-                현재 구성된 가문원 자산 리스트를 안전하게 JSON 백업코드로 복사하거나, 이전에 보관했던 백업코드를 붙여넣어 자산을 복원할 수 있습니다.
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-5 leading-relaxed">
+                현재 구성된 가문원 자산 리스트를 날짜/시간이 기록된 JSON 파일로 다운로드하여 백업하거나, 이전에 다운로드해 둔 백업 파일을 선택해 자산을 복원할 수 있습니다.
             </p>
-            
-            <textarea id="json-textarea" class="w-full h-36 border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 font-mono text-[10px] p-3 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none leading-relaxed" placeholder="이곳에 JSON 데이터를 붙여넣거나 복사하세요."></textarea>
-            
-            <div class="mt-4 flex gap-2">
-                <button onclick="copyBackupCode()" class="flex-1 py-3 bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/40 dark:hover:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-bold rounded-xl text-xs transition-colors">백업 코드 복사</button>
-                <button onclick="restoreBackupCode()" class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-blue-500/10">데이터 복원하기</button>
+
+            <input type="file" id="restore-file-input" accept="application/json,.json" class="hidden" onchange="restoreBackupFile(event)">
+
+            <div class="flex gap-2">
+                <button onclick="backupDataToFile()" class="flex-1 py-3 bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/40 dark:hover:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-bold rounded-xl text-xs transition-colors">데이터 백업</button>
+                <button onclick="document.getElementById('restore-file-input').click()" class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-blue-500/10">데이터 복원</button>
             </div>
         </div>
     </div>
@@ -847,9 +847,6 @@
         // --- UI Helper: Export/Import Modal ---
         function openExportModal() {
             const modal = document.getElementById('export-modal');
-            const textarea = document.getElementById('json-textarea');
-            textarea.value = JSON.stringify(family, null, 2);
-            
             modal.classList.remove('hidden');
             setTimeout(() => {
                 document.getElementById('export-content').classList.remove('scale-95', 'opacity-0');
@@ -864,29 +861,49 @@
             }, 200);
         }
 
-        function copyBackupCode() {
-            const textarea = document.getElementById('json-textarea');
-            textarea.select();
-            document.execCommand('copy');
-            showToast('백업 코드가 클립보드에 성공적으로 복사되었습니다.', 'success');
+        function backupDataToFile() {
+            const now = new Date();
+            const pad = n => String(n).padStart(2, '0');
+            const stamp = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}_${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+
+            const blob = new Blob([JSON.stringify(family, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${stamp}.json`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+
+            showToast(`백업 파일(${stamp}.json)이 다운로드되었습니다.`, 'success');
         }
 
-        function restoreBackupCode() {
-            const textarea = document.getElementById('json-textarea');
-            try {
-                const parsed = JSON.parse(textarea.value);
-                if (Array.isArray(parsed)) {
-                    family = parsed;
-                    saveState();
-                    renderFamily();
-                    closeExportModal();
-                    showToast('가계 자산 데이터가 복원 완료되었습니다.', 'success');
-                } else {
-                    showToast('올바르지 않은 백업 데이터 형식입니다.', 'error');
+        function restoreBackupFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if (Array.isArray(parsed)) {
+                        family = parsed;
+                        saveState();
+                        renderFamily();
+                        closeExportModal();
+                        showToast('가계 자산 데이터가 복원 완료되었습니다.', 'success');
+                    } else {
+                        showToast('올바르지 않은 백업 데이터 형식입니다.', 'error');
+                    }
+                } catch (err) {
+                    showToast('JSON 구문 에러: 올바른 백업 파일을 선택해주세요.', 'error');
                 }
-            } catch (e) {
-                showToast('JSON 구문 에러: 백업 코드를 정확하게 기입해주세요.', 'error');
-            }
+            };
+            reader.readAsText(file);
+
+            event.target.value = '';
         }
 
         // --- Core Formatting ---
