@@ -744,6 +744,7 @@
         }
 
         let currentEditingId = null;
+        let editingItem = null; // { category: 're'|'fin'|'debt', id: string }
         let activeAssetTab = 're'; // 're', 'fin', 'debt'
         let taxType = 'inheritance'; // 'inheritance', 'gift'
         let appraisalBasis = 'official'; // 'official' (공시지가), 'market' (실거래가)
@@ -889,6 +890,10 @@
         }
 
         // --- Core Formatting ---
+        function escapeAttr(str) {
+            return String(str ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
         function formatKRW(num) {
             if (num === 0) return '0원';
             const sign = num < 0 ? '-' : '';
@@ -1078,6 +1083,7 @@
         // --- Workspace Asset Itemized Editing ---
         function openEditSection(id) {
             currentEditingId = id;
+            editingItem = null;
             const m = family.find(x => x.id === id);
             
             document.getElementById('input-section').classList.remove('hidden');
@@ -1093,6 +1099,7 @@
 
         function closeInputSection() {
             currentEditingId = null;
+            editingItem = null;
             document.getElementById('input-section').classList.add('hidden');
             renderFamily();
         }
@@ -1133,17 +1140,38 @@
             } else {
                 m.itemizedAssets.realEstate.forEach(x => {
                     const tr = document.createElement('tr');
-                    tr.className = "hover:bg-slate-50/50 dark:hover:bg-slate-800/30";
-                    tr.innerHTML = `
-                        <td class="py-3 font-semibold text-slate-700 dark:text-slate-300">${x.label}</td>
-                        <td class="py-3 text-right font-mono text-slate-500">${formatKRW(x.official)}</td>
-                        <td class="py-3 text-right font-mono font-bold text-slate-800 dark:text-slate-200">${formatKRW(x.market)}</td>
-                        <td class="py-3 text-right">
-                            <button onclick="removeItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded text-rose-500 hover:text-rose-600">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M1 7h22"/></svg>
-                            </button>
-                        </td>
-                    `;
+                    const isEditing = editingItem && editingItem.category === 're' && editingItem.id === x.id;
+                    if (isEditing) {
+                        tr.className = "bg-blue-50/50 dark:bg-blue-950/20";
+                        tr.innerHTML = `
+                            <td class="py-2 pr-2"><input type="text" id="edit-re-label" value="${escapeAttr(x.label)}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs outline-none focus:ring-2 focus:ring-blue-500"></td>
+                            <td class="py-2 pr-2"><input type="number" id="edit-re-official" value="${x.official}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs text-right outline-none focus:ring-2 focus:ring-blue-500"></td>
+                            <td class="py-2 pr-2"><input type="number" id="edit-re-market" value="${x.market}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs text-right outline-none focus:ring-2 focus:ring-blue-500"></td>
+                            <td class="py-3 text-right whitespace-nowrap">
+                                <button onclick="saveEditItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded text-emerald-600 hover:text-emerald-700" title="저장">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400 hover:text-slate-600" title="취소">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                                </button>
+                            </td>
+                        `;
+                    } else {
+                        tr.className = "hover:bg-slate-50/50 dark:hover:bg-slate-800/30";
+                        tr.innerHTML = `
+                            <td class="py-3 font-semibold text-slate-700 dark:text-slate-300">${x.label}</td>
+                            <td class="py-3 text-right font-mono text-slate-500">${formatKRW(x.official)}</td>
+                            <td class="py-3 text-right font-mono font-bold text-slate-800 dark:text-slate-200">${formatKRW(x.market)}</td>
+                            <td class="py-3 text-right whitespace-nowrap">
+                                <button onclick="startEditItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded text-blue-500 hover:text-blue-600" title="수정">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                </button>
+                                <button onclick="removeItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded text-rose-500 hover:text-rose-600" title="삭제">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M1 7h22"/></svg>
+                                </button>
+                            </td>
+                        `;
+                    }
                     reTbody.appendChild(tr);
                 });
             }
@@ -1156,21 +1184,47 @@
             } else {
                 m.itemizedAssets.financial.forEach(x => {
                     const tr = document.createElement('tr');
-                    tr.className = "hover:bg-slate-50/50 dark:hover:bg-slate-800/30";
-                    tr.innerHTML = `
-                        <td class="py-3 font-semibold text-slate-700 dark:text-slate-300">${x.label}</td>
-                        <td class="py-3">
-                            <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${x.type === 'cash' ? 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600' : 'bg-sky-50 dark:bg-sky-950/50 text-sky-600'}">
-                                ${x.type === 'cash' ? '현금/예적금' : '주식/증권'}
-                            </span>
-                        </td>
-                        <td class="py-3 text-right font-mono font-bold text-slate-800 dark:text-slate-200">${formatKRW(x.value)}</td>
-                        <td class="py-3 text-right">
-                            <button onclick="removeItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded text-rose-500 hover:text-rose-600">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M1 7h22"/></svg>
-                            </button>
-                        </td>
-                    `;
+                    const isEditing = editingItem && editingItem.category === 'fin' && editingItem.id === x.id;
+                    if (isEditing) {
+                        tr.className = "bg-blue-50/50 dark:bg-blue-950/20";
+                        tr.innerHTML = `
+                            <td class="py-2 pr-2"><input type="text" id="edit-fin-label" value="${escapeAttr(x.label)}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs outline-none focus:ring-2 focus:ring-blue-500"></td>
+                            <td class="py-2 pr-2">
+                                <select id="edit-fin-type" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="cash" ${x.type === 'cash' ? 'selected' : ''}>현금 / 예·적금</option>
+                                    <option value="stock" ${x.type === 'stock' ? 'selected' : ''}>주식 / ETF / 채권</option>
+                                </select>
+                            </td>
+                            <td class="py-2 pr-2"><input type="number" id="edit-fin-value" value="${x.value}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs text-right outline-none focus:ring-2 focus:ring-blue-500"></td>
+                            <td class="py-3 text-right whitespace-nowrap">
+                                <button onclick="saveEditItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded text-emerald-600 hover:text-emerald-700" title="저장">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400 hover:text-slate-600" title="취소">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                                </button>
+                            </td>
+                        `;
+                    } else {
+                        tr.className = "hover:bg-slate-50/50 dark:hover:bg-slate-800/30";
+                        tr.innerHTML = `
+                            <td class="py-3 font-semibold text-slate-700 dark:text-slate-300">${x.label}</td>
+                            <td class="py-3">
+                                <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${x.type === 'cash' ? 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600' : 'bg-sky-50 dark:bg-sky-950/50 text-sky-600'}">
+                                    ${x.type === 'cash' ? '현금/예적금' : '주식/증권'}
+                                </span>
+                            </td>
+                            <td class="py-3 text-right font-mono font-bold text-slate-800 dark:text-slate-200">${formatKRW(x.value)}</td>
+                            <td class="py-3 text-right whitespace-nowrap">
+                                <button onclick="startEditItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded text-blue-500 hover:text-blue-600" title="수정">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                </button>
+                                <button onclick="removeItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded text-rose-500 hover:text-rose-600" title="삭제">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M1 7h22"/></svg>
+                                </button>
+                            </td>
+                        `;
+                    }
                     finTbody.appendChild(tr);
                 });
             }
@@ -1183,16 +1237,36 @@
             } else {
                 m.itemizedAssets.debt.forEach(x => {
                     const tr = document.createElement('tr');
-                    tr.className = "hover:bg-slate-50/50 dark:hover:bg-slate-800/30";
-                    tr.innerHTML = `
-                        <td class="py-3 font-semibold text-slate-700 dark:text-slate-300">${x.label}</td>
-                        <td class="py-3 text-right font-mono font-bold text-rose-600">${formatKRW(x.value)}</td>
-                        <td class="py-3 text-right">
-                            <button onclick="removeItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded text-rose-500 hover:text-rose-600">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M1 7h22"/></svg>
-                            </button>
-                        </td>
-                    `;
+                    const isEditing = editingItem && editingItem.category === 'debt' && editingItem.id === x.id;
+                    if (isEditing) {
+                        tr.className = "bg-blue-50/50 dark:bg-blue-950/20";
+                        tr.innerHTML = `
+                            <td class="py-2 pr-2"><input type="text" id="edit-debt-label" value="${escapeAttr(x.label)}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs outline-none focus:ring-2 focus:ring-blue-500"></td>
+                            <td class="py-2 pr-2"><input type="number" id="edit-debt-value" value="${x.value}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs text-right outline-none focus:ring-2 focus:ring-blue-500"></td>
+                            <td class="py-3 text-right whitespace-nowrap">
+                                <button onclick="saveEditItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded text-emerald-600 hover:text-emerald-700" title="저장">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400 hover:text-slate-600" title="취소">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                                </button>
+                            </td>
+                        `;
+                    } else {
+                        tr.className = "hover:bg-slate-50/50 dark:hover:bg-slate-800/30";
+                        tr.innerHTML = `
+                            <td class="py-3 font-semibold text-slate-700 dark:text-slate-300">${x.label}</td>
+                            <td class="py-3 text-right font-mono font-bold text-rose-600">${formatKRW(x.value)}</td>
+                            <td class="py-3 text-right whitespace-nowrap">
+                                <button onclick="startEditItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded text-blue-500 hover:text-blue-600" title="수정">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                </button>
+                                <button onclick="removeItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded text-rose-500 hover:text-rose-600" title="삭제">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M1 7h22"/></svg>
+                                </button>
+                            </td>
+                        `;
+                    }
                     debtTbody.appendChild(tr);
                 });
             }
@@ -1249,6 +1323,63 @@
             renderItemizedTables();
             updateMemberSummaryBadges(m);
             showToast('새 자산 항목이 반영되었습니다.', 'success');
+        }
+
+        function startEditItemizedAsset(category, itemId) {
+            editingItem = { category, id: itemId };
+            renderItemizedTables();
+        }
+
+        function cancelEditItemizedAsset() {
+            editingItem = null;
+            renderItemizedTables();
+        }
+
+        function saveEditItemizedAsset(category, itemId) {
+            const m = family.find(x => x.id === currentEditingId);
+            if (!m) return;
+
+            if (category === 're') {
+                const item = m.itemizedAssets.realEstate.find(x => x.id === itemId);
+                const label = document.getElementById('edit-re-label').value.trim();
+                const official = Number(document.getElementById('edit-re-official').value);
+                const market = Number(document.getElementById('edit-re-market').value);
+
+                if (!label) return showToast('부동산 정보 명칭을 기입하세요.', 'error');
+                if (official <= 0 || market <= 0) return showToast('금액은 0보다 큰 숫자여야 합니다.', 'error');
+
+                item.label = label;
+                item.official = official;
+                item.market = market;
+            } else if (category === 'fin') {
+                const item = m.itemizedAssets.financial.find(x => x.id === itemId);
+                const label = document.getElementById('edit-fin-label').value.trim();
+                const type = document.getElementById('edit-fin-type').value;
+                const value = Number(document.getElementById('edit-fin-value').value);
+
+                if (!label) return showToast('금융자산 명칭을 기입하세요.', 'error');
+                if (value <= 0) return showToast('자산 가액을 기입하세요.', 'error');
+
+                item.label = label;
+                item.type = type;
+                item.value = value;
+            } else if (category === 'debt') {
+                const item = m.itemizedAssets.debt.find(x => x.id === itemId);
+                const label = document.getElementById('edit-debt-label').value.trim();
+                const value = Number(document.getElementById('edit-debt-value').value);
+
+                if (!label) return showToast('부채명을 기입하세요.', 'error');
+                if (value <= 0) return showToast('부채 액수를 적어주세요.', 'error');
+
+                item.label = label;
+                item.value = value;
+            }
+
+            editingItem = null;
+            saveState();
+            renderItemizedTables();
+            updateMemberSummaryBadges(m);
+            showToast('자산 항목이 수정되었습니다.', 'success');
         }
 
         function removeItemizedAsset(category, itemId) {
