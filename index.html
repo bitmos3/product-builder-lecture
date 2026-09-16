@@ -16,44 +16,44 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        display: ['Pretendard', 'sans-serif'],
+                        display: ['"Segoe UI"', 'Pretendard', '-apple-system', 'sans-serif'],
                     },
                     colors: {
-                        /* WEBTOONS-style identity: signature green + ink black + white/gray */
+                        /* Microsoft Power BI identity: classic report-theme teal/gold/coral + Fluent neutrals */
                         brand: {
-                            50: '#eaf8f1', 100: '#cff3e1', 200: '#9fe8c4', 300: '#62d8a0',
-                            400: '#2dce86', 500: '#0edb70', 600: '#00d564', 700: '#00a854',
-                            800: '#00873f', 900: '#076b34', 950: '#0a5129',
+                            50: '#e6faf8', 100: '#c1f2ed', 200: '#8fe6dd', 300: '#52d5c7',
+                            400: '#1ecbba', 500: '#05c3b3', 600: '#01b8aa', 700: '#018f84',
+                            800: '#026f66', 900: '#0a544d', 950: '#05302c',
                         },
-                        /* Primary accent — signature webtoon green (replaces default blue) */
+                        /* Primary accent — Power BI classic teal (#01B8AA), replaces default blue */
                         blue: {
-                            50: '#eaf8f1', 100: '#cff3e1', 200: '#9fe8c4', 300: '#62d8a0',
-                            400: '#2dce86', 500: '#0edb70', 600: '#00d564', 700: '#00a854',
-                            800: '#00873f', 900: '#076b34', 950: '#0a5129',
+                            50: '#e6faf8', 100: '#c1f2ed', 200: '#8fe6dd', 300: '#52d5c7',
+                            400: '#1ecbba', 500: '#05c3b3', 600: '#01b8aa', 700: '#018f84',
+                            800: '#026f66', 900: '#0a544d', 950: '#05302c',
                         },
-                        /* Ink black secondary accent (replaces default indigo) */
+                        /* Secondary accent — Power BI classic gold (#F2C80F/#D9B300), replaces default indigo */
                         indigo: {
-                            50: '#f2f3f4', 100: '#e4e6e8', 200: '#c9cdd1', 300: '#a6acb2',
-                            400: '#7a8189', 500: '#595e65', 600: '#4a4f55', 700: '#383c41',
-                            800: '#26292d', 900: '#17191c', 950: '#0a0b0c',
+                            50: '#fefbea', 100: '#fcf3c4', 200: '#f9e68c', 300: '#f6d950',
+                            400: '#f3ce28', 500: '#f2c80f', 600: '#d9b300', 700: '#a88802',
+                            800: '#7a6402', 900: '#5c4b03', 950: '#332900',
                         },
-                        /* Cool neutral gray (replaces default slate) */
+                        /* Fluent UI neutral gray ramp, replaces default slate */
                         slate: {
-                            50: '#f8f9fa', 100: '#f0f1f2', 200: '#e3e5e7', 300: '#c9cdd1',
-                            400: '#a6acb2', 500: '#7a8189', 600: '#595e65', 700: '#42474d',
-                            800: '#292c30', 900: '#17191c', 950: '#0d0e10',
+                            50: '#faf9f8', 100: '#f3f2f1', 200: '#edebe9', 300: '#e1dfdd',
+                            400: '#c8c6c4', 500: '#a19f9d', 600: '#605e5c', 700: '#3b3a39',
+                            800: '#323130', 900: '#201f1e', 950: '#0f0e0d',
                         },
-                        /* Debt/negative semantic — clean flat red */
+                        /* Debt/negative semantic — Power BI classic coral/red (#FD625E) */
                         rose: {
-                            50: '#fef2f2', 100: '#fde2e2', 200: '#fbc5c5', 300: '#f79999',
-                            400: '#f16565', 500: '#e83e3e', 600: '#d42a2a', 700: '#b01f1f',
-                            800: '#911d1d', 900: '#791c1c', 950: '#420b0b',
+                            50: '#fff1f0', 100: '#ffdedc', 200: '#ffc0bc', 300: '#fe9d97',
+                            400: '#fd7b74', 500: '#fd625e', 600: '#e5443f', 700: '#c22f2b',
+                            800: '#9c2622', 900: '#7a1e1b', 950: '#430f0d',
                         },
-                        /* Positive/success semantic — same signature green family */
+                        /* Positive/success semantic — Fluent UI success green (#107C10) */
                         emerald: {
-                            50: '#eaf8f1', 100: '#cff3e1', 200: '#9fe8c4', 300: '#62d8a0',
-                            400: '#2dce86', 500: '#0edb70', 600: '#00a854', 700: '#00873f',
-                            800: '#076b34', 900: '#0a5129', 950: '#053018',
+                            50: '#effaef', 100: '#d6f0d6', 200: '#a8e0a8', 300: '#74cc74',
+                            400: '#3faf3f', 500: '#229722', 600: '#107c10', 700: '#0b5d0b',
+                            800: '#0a4a0a', 900: '#073607', 950: '#041f04',
                         },
                     },
                     animation: {
@@ -81,30 +81,30 @@
     </script>
     <style>
         body {
-            font-family: 'Pretendard', sans-serif;
-            background-color: #ffffff;
+            font-family: 'Segoe UI', 'Pretendard', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background-color: #faf9f8;
             transition: background-color 0.3s, color 0.3s;
         }
         .dark body {
-            background-color: #121315;
-            color: #f0f1f2;
+            background-color: #1b1a19;
+            color: #f3f2f1;
         }
-        .font-display { font-family: 'Pretendard', sans-serif; font-weight: 900; letter-spacing: -0.02em; }
+        .font-display { font-family: 'Segoe UI', 'Pretendard', sans-serif; font-weight: 600; letter-spacing: 0; }
         .chart-container { position: relative; height: 280px; width: 100%; }
         input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-        /* Flat scrollbar */
+        /* Fluent-style scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb {
-            background: #c9cdd1;
+            background: #e1dfdd;
             border-radius: 999px;
         }
         .dark ::-webkit-scrollbar-thumb {
-            background: #42474d;
+            background: #3b3a39;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #a6acb2;
+            background: #c8c6c4;
         }
 
         /* Print Media Stylesheet */
@@ -114,21 +114,35 @@
             main { max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
             .grid { display: block !important; }
             .chart-container { height: 200px !important; page-break-inside: avoid; }
-            .bg-white, .dark .bg-slate-900, .bg-slate-50, .dark .bg-slate-950 { background: transparent !important; border: 1px solid #e3e5e7 !important; box-shadow: none !important; }
+            .bg-white, .dark .bg-slate-900, .bg-slate-50, .dark .bg-slate-950 { background: transparent !important; border: 1px solid #edebe9 !important; box-shadow: none !important; }
             .text-white { color: black !important; }
-            .bg-blue-900, .bg-slate-900 { background: #f0f1f2 !important; color: black !important; }
+            .bg-blue-900, .bg-slate-900 { background: #f3f2f1 !important; color: black !important; }
             h2, h3, h4 { color: black !important; page-break-after: avoid; }
             section { page-break-inside: avoid; margin-bottom: 2rem !important; }
         }
     </style>
 </head>
-<body class="text-slate-800 dark:text-slate-200 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+<body class="text-slate-800 dark:text-slate-200 min-h-screen flex selection:bg-brand-500 selection:text-white">
 
+    <!-- Icon Nav Rail (Power BI-style app sidebar) -->
+    <aside class="hidden md:flex flex-col items-center w-16 shrink-0 bg-slate-900 dark:bg-slate-950 h-screen sticky top-0 z-50 py-4 no-print">
+        <div class="w-9 h-9 rounded-md bg-blue-500 flex items-center justify-center text-white font-black text-sm mb-6" title="우리가문 자산 시뮬레이터">우</div>
+        <nav class="flex flex-col items-center gap-1 flex-1">
+            <button onclick="document.body.scrollIntoView({behavior:'smooth'})" class="w-11 h-11 rounded-md flex items-center justify-center text-lg text-blue-400 bg-white/10 hover:bg-white/15 transition-colors" title="홈">🏠</button>
+            <button onclick="document.getElementById('section-family').scrollIntoView({behavior:'smooth', block:'start'})" class="w-11 h-11 rounded-md flex items-center justify-center text-lg text-slate-400 hover:bg-white/10 hover:text-white transition-colors" title="가문 구성원">👪</button>
+            <button onclick="document.getElementById('section-charts').scrollIntoView({behavior:'smooth', block:'start'})" class="w-11 h-11 rounded-md flex items-center justify-center text-lg text-slate-400 hover:bg-white/10 hover:text-white transition-colors" title="자산 대시보드">📊</button>
+            <button onclick="document.getElementById('section-tax').scrollIntoView({behavior:'smooth', block:'start'})" class="w-11 h-11 rounded-md flex items-center justify-center text-lg text-slate-400 hover:bg-white/10 hover:text-white transition-colors" title="세금 시뮬레이션">🧮</button>
+            <button onclick="document.getElementById('consulting-box').scrollIntoView({behavior:'smooth', block:'start'})" class="w-11 h-11 rounded-md flex items-center justify-center text-lg text-slate-400 hover:bg-white/10 hover:text-white transition-colors" title="절세 컨설팅">💡</button>
+        </nav>
+        <button onclick="openExportModal()" class="w-11 h-11 rounded-md flex items-center justify-center text-lg text-slate-400 hover:bg-white/10 hover:text-white transition-colors" title="데이터 백업/복원">📦</button>
+    </aside>
+
+    <div class="flex flex-col flex-1 min-w-0 min-h-screen">
     <!-- Header -->
-    <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 transition-all">
+    <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-40 transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center shadow-md shadow-blue-500/20 text-white font-extrabold text-xl">
+                <div class="w-10 h-10 rounded-md bg-blue-600 flex items-center justify-center shadow-md shadow-blue-500/20 text-white font-extrabold text-xl">
                     👑
                 </div>
                 <div>
@@ -140,22 +154,22 @@
             </div>
             
             <div class="flex items-center gap-2 md:gap-3">
-                <button onclick="loadSampleData()" class="px-3 py-1.5 rounded-full text-xs font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 border border-blue-200/50 dark:border-blue-900/40 transition-all flex items-center gap-1.5" title="분석 데모용 가계 데이터를 불러옵니다">
+                <button onclick="loadSampleData()" class="px-3 py-1.5 rounded-md text-xs font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 border border-blue-200/50 dark:border-blue-900/40 transition-all flex items-center gap-1.5" title="분석 데모용 가계 데이터를 불러옵니다">
                     📊 샘플 데이터
                 </button>
-                <button onclick="openExportModal()" class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors" title="데이터 가져오기/내보내기">
+                <button onclick="openExportModal()" class="p-2 rounded-md text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors" title="데이터 가져오기/내보내기">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
                 </button>
-                <button onclick="window.print()" class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors" title="리포트 인쇄 / PDF 저장">
+                <button onclick="window.print()" class="p-2 rounded-md text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors" title="리포트 인쇄 / PDF 저장">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4"/></svg>
                 </button>
-                <button onclick="toggleTheme()" class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors" id="theme-toggle" title="테마 전환">
+                <button onclick="toggleTheme()" class="p-2 rounded-md text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors" id="theme-toggle" title="테마 전환">
                     <!-- Sun icon -->
                     <svg class="w-4 h-4 hidden dark:block text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 14.05a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zm-.707-8.485a1 1 0 011.414-1.414l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/></svg>
                     <!-- Moon icon -->
                     <svg class="w-4 h-4 block dark:hidden text-slate-600" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
                 </button>
-                <button onclick="confirmReset()" class="text-xs text-rose-500 hover:text-rose-600 dark:text-rose-400 font-semibold px-2.5 py-1.5 rounded-full hover:bg-rose-500/10 transition-colors" title="데이터 초기화">초기화</button>
+                <button onclick="confirmReset()" class="text-xs text-rose-500 hover:text-rose-600 dark:text-rose-400 font-semibold px-2.5 py-1.5 rounded-md hover:bg-rose-500/10 transition-colors" title="데이터 초기화">초기화</button>
             </div>
         </div>
     </header>
@@ -165,7 +179,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             <!-- Left: Sidebar & Family List (col-span-4) -->
-            <aside class="lg:col-span-4 space-y-6">
+            <aside id="section-family" class="lg:col-span-4 space-y-6">
                 <!-- Family Card -->
                 <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm p-6">
                     <div class="flex justify-between items-center mb-4">
@@ -178,7 +192,7 @@
                         <!-- Members injected here -->
                     </div>
                     
-                    <button onclick="openAddMemberModal()" class="w-full py-3.5 border-2 border-dashed border-slate-200 hover:border-brand-500 dark:border-slate-800 dark:hover:border-brand-500/50 rounded-full text-slate-500 dark:text-slate-400 font-bold hover:text-brand-600 dark:hover:text-brand-400 transition-all flex items-center justify-center gap-2 bg-slate-50/50 dark:bg-slate-950/20">
+                    <button onclick="openAddMemberModal()" class="w-full py-3.5 border-2 border-dashed border-slate-200 hover:border-brand-500 dark:border-slate-800 dark:hover:border-brand-500/50 rounded-md text-slate-500 dark:text-slate-400 font-bold hover:text-brand-600 dark:hover:text-brand-400 transition-all flex items-center justify-center gap-2 bg-slate-50/50 dark:bg-slate-950/20">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                         구성원 추가하기
                     </button>
@@ -224,7 +238,7 @@
                 <section id="input-section" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm p-6 hidden animate-slide-up">
                     <div class="flex justify-between items-center mb-6">
                         <div class="flex items-center gap-3">
-                            <span class="p-2 bg-blue-50 dark:bg-blue-950/40 rounded-full text-blue-600 dark:text-blue-400">
+                            <span class="p-2 bg-blue-50 dark:bg-blue-950/40 rounded-md text-blue-600 dark:text-blue-400">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                             </span>
                             <div>
@@ -232,7 +246,7 @@
                                 <p class="text-xs text-slate-500 mt-0.5">상세 항목 입력 시 모든 대시보드와 보고서에 실시간 반영 및 자동 저장됩니다.</p>
                             </div>
                         </div>
-                        <button onclick="closeInputSection()" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-400 hover:text-slate-600 transition-colors">
+                        <button onclick="closeInputSection()" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md text-slate-400 hover:text-slate-600 transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                         </button>
                     </div>
@@ -304,7 +318,7 @@
                                     <label class="text-[10px] font-bold text-slate-400 mb-1 block">실거래 시세 (원)</label>
                                     <input type="number" id="add-re-market" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs outline-none focus:ring-2 focus:ring-blue-500" placeholder="0">
                                 </div>
-                                <button onclick="addItemizedAsset('re')" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-4 rounded-full flex items-center justify-center gap-1 shrink-0">
+                                <button onclick="addItemizedAsset('re')" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-4 rounded-md flex items-center justify-center gap-1 shrink-0">
                                     <span>+</span> 추가
                                 </button>
                             </div>
@@ -344,7 +358,7 @@
                                     <label class="text-[10px] font-bold text-slate-400 mb-1 block">자산 평가액 (원)</label>
                                     <input type="number" id="add-fin-value" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs outline-none focus:ring-2 focus:ring-blue-500" placeholder="0">
                                 </div>
-                                <button onclick="addItemizedAsset('fin')" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-4 rounded-full flex items-center justify-center gap-1 shrink-0">
+                                <button onclick="addItemizedAsset('fin')" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-4 rounded-md flex items-center justify-center gap-1 shrink-0">
                                     <span>+</span> 추가
                                 </button>
                             </div>
@@ -376,7 +390,7 @@
                                     <label class="text-[10px] font-bold text-slate-400 mb-1 block">부채 금액 (원)</label>
                                     <input type="number" id="add-debt-value" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs outline-none focus:ring-2 focus:ring-rose-500 text-rose-600" placeholder="0">
                                 </div>
-                                <button onclick="addItemizedAsset('debt')" class="w-full md:w-auto bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs py-3 px-4 rounded-full flex items-center justify-center gap-1 shrink-0">
+                                <button onclick="addItemizedAsset('debt')" class="w-full md:w-auto bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs py-3 px-4 rounded-md flex items-center justify-center gap-1 shrink-0">
                                     <span>+</span> 추가
                                 </button>
                             </div>
@@ -386,17 +400,17 @@
 
                     <!-- Close & Delete Member Area -->
                     <div class="mt-8 pt-5 border-t border-slate-100 dark:border-slate-800/60 flex justify-between gap-3">
-                        <button onclick="closeInputSection()" class="px-5 py-2.5 text-xs font-bold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-full transition-all">
+                        <button onclick="closeInputSection()" class="px-5 py-2.5 text-xs font-bold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-md transition-all">
                             닫기
                         </button>
-                        <button onclick="deleteMember()" class="px-4 py-2.5 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-900/30 text-rose-600 dark:text-rose-400 text-xs font-bold rounded-full transition-all">
+                        <button onclick="deleteMember()" class="px-4 py-2.5 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-900/30 text-rose-600 dark:text-rose-400 text-xs font-bold rounded-md transition-all">
                             이 구성원 삭제
                         </button>
                     </div>
                 </section>
 
                 <!-- Section 2: Dashboard & Charts -->
-                <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <section id="section-charts" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Chart Card 1 -->
                     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm p-6 relative overflow-hidden">
                         <div class="flex items-center justify-between mb-4">
@@ -424,7 +438,7 @@
                 </section>
 
                 <!-- Section 3: Premium Tax Simulator -->
-                <section class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-md overflow-hidden">
+                <section id="section-tax" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-md overflow-hidden">
                     <!-- Tax Section Header -->
                     <div class="bg-slate-900 dark:bg-slate-950 p-6 text-white border-b border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div>
@@ -436,8 +450,8 @@
                         <!-- Evaluation Basis Toggle (Korea Specific) -->
                         <div class="flex items-center gap-2 bg-slate-800/70 p-1 rounded-xl text-xs border border-slate-700/60 no-print">
                             <span class="text-[10px] text-slate-400 px-1 font-bold">부동산 평가:</span>
-                            <button onclick="setAppraisalBasis('official')" id="btn-basis-off" class="px-2.5 py-1 rounded-full font-bold text-[10px] bg-slate-900 text-blue-400 border border-slate-700/80 shadow">공시지가</button>
-                            <button onclick="setAppraisalBasis('market')" id="btn-basis-mkt" class="px-2.5 py-1 rounded-full font-bold text-[10px] text-slate-400">실거래가</button>
+                            <button onclick="setAppraisalBasis('official')" id="btn-basis-off" class="px-2.5 py-1 rounded-md font-bold text-[10px] bg-slate-900 text-blue-400 border border-slate-700/80 shadow">공시지가</button>
+                            <button onclick="setAppraisalBasis('market')" id="btn-basis-mkt" class="px-2.5 py-1 rounded-md font-bold text-[10px] text-slate-400">실거래가</button>
                         </div>
                     </div>
                     
@@ -453,8 +467,8 @@
                             <div>
                                 <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-2">솔루션 종류</label>
                                 <div class="flex p-1 bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-200/40 dark:border-slate-850">
-                                    <button onclick="setTaxType('inheritance')" id="btn-type-inh" class="flex-1 py-2 rounded-full font-extrabold text-xs transition-all bg-white dark:bg-slate-900 shadow text-blue-600 dark:text-blue-400">상속세 모의</button>
-                                    <button onclick="setTaxType('gift')" id="btn-type-gift" class="flex-1 py-2 rounded-full font-bold text-xs transition-all text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">증여세 모의</button>
+                                    <button onclick="setTaxType('inheritance')" id="btn-type-inh" class="flex-1 py-2 rounded-md font-extrabold text-xs transition-all bg-white dark:bg-slate-900 shadow text-blue-600 dark:text-blue-400">상속세 모의</button>
+                                    <button onclick="setTaxType('gift')" id="btn-type-gift" class="flex-1 py-2 rounded-md font-bold text-xs transition-all text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">증여세 모의</button>
                                 </div>
                             </div>
                             <div id="gift-target-box" class="invisible">
@@ -539,6 +553,7 @@
             </div>
         </div>
     </main>
+    </div>
 
     <!-- Modal for Adding Member -->
     <div id="add-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center hidden p-4 transition-all duration-300">
@@ -561,8 +576,8 @@
                 </div>
             </div>
             <div class="mt-8 flex gap-3">
-                <button onclick="closeAddMemberModal()" class="flex-1 py-3.5 text-slate-500 dark:text-slate-400 font-bold hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors text-sm">취소</button>
-                <button onclick="addMember()" class="flex-[2] py-3.5 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 shadow-lg shadow-blue-500/10 transition-all text-sm">구성원 등록</button>
+                <button onclick="closeAddMemberModal()" class="flex-1 py-3.5 text-slate-500 dark:text-slate-400 font-bold hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors text-sm">취소</button>
+                <button onclick="addMember()" class="flex-[2] py-3.5 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 shadow-lg shadow-blue-500/10 transition-all text-sm">구성원 등록</button>
             </div>
         </div>
     </div>
@@ -573,8 +588,8 @@
             <h3 class="text-base font-extrabold text-slate-900 dark:text-white mb-2" id="confirm-title">확인</h3>
             <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 leading-relaxed" id="confirm-message">이 작업을 진행하시겠습니까?</p>
             <div class="flex gap-2">
-                <button onclick="closeCustomConfirm()" class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-850 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-full transition-colors text-xs">취소</button>
-                <button id="confirm-btn-yes" class="flex-1 py-3 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-full transition-all text-xs shadow-lg shadow-rose-600/10">확인</button>
+                <button onclick="closeCustomConfirm()" class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-850 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-md transition-colors text-xs">취소</button>
+                <button id="confirm-btn-yes" class="flex-1 py-3 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-md transition-all text-xs shadow-lg shadow-rose-600/10">확인</button>
             </div>
         </div>
     </div>
@@ -596,8 +611,8 @@
             <input type="file" id="restore-file-input" accept="application/json,.json" class="hidden" onchange="restoreBackupFile(event)">
 
             <div class="flex gap-2">
-                <button onclick="backupDataToFile()" class="flex-1 py-3 bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/40 dark:hover:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-bold rounded-full text-xs transition-colors">데이터 백업</button>
-                <button onclick="document.getElementById('restore-file-input').click()" class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full text-xs transition-all shadow-md shadow-blue-500/10">데이터 복원</button>
+                <button onclick="backupDataToFile()" class="flex-1 py-3 bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/40 dark:hover:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-bold rounded-md text-xs transition-colors">데이터 백업</button>
+                <button onclick="document.getElementById('restore-file-input').click()" class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-md text-xs transition-all shadow-md shadow-blue-500/10">데이터 복원</button>
             </div>
 
             <div class="my-5 border-t border-slate-200 dark:border-slate-800"></div>
@@ -609,8 +624,8 @@
                 위 백업/복구와는 별개로, 현재 자산 데이터를 이 앱의 <b>index.html 파일 자체</b>의 기본값으로 덮어씁니다. 저장 후에는 터미널에서 git add/commit/push로 반영해야 합니다. (Chrome/Edge 브라우저 필요, 최초 1회 파일 선택 필요)
             </p>
             <div class="flex gap-2 items-center">
-                <button onclick="saveFamilyDataToIndexHtml()" class="flex-1 py-3 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 font-bold rounded-full text-xs transition-colors">index.html에 저장</button>
-                <button onclick="resetIndexHtmlHandle()" title="다른 index.html 파일 선택" class="px-3 py-3 bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/60 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 font-bold rounded-full text-xs transition-colors">파일 재선택</button>
+                <button onclick="saveFamilyDataToIndexHtml()" class="flex-1 py-3 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 font-bold rounded-md text-xs transition-colors">index.html에 저장</button>
+                <button onclick="resetIndexHtmlHandle()" title="다른 index.html 파일 선택" class="px-3 py-3 bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/60 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 font-bold rounded-md text-xs transition-colors">파일 재선택</button>
             </div>
         </div>
     </div>
@@ -1099,9 +1114,9 @@
         function getThemeColors() {
             const isDark = document.documentElement.classList.contains('dark');
             return {
-                text: isDark ? '#a6acb2' : '#595e65',
-                grid: isDark ? '#292c30' : '#f0f1f2',
-                labels: isDark ? '#e3e5e7' : '#292c30'
+                text: isDark ? '#c8c6c4' : '#605e5c',
+                grid: isDark ? '#323130' : '#f3f2f1',
+                labels: isDark ? '#edebe9' : '#323130'
             };
         }
 
@@ -1322,10 +1337,10 @@
                             <td class="py-2 pr-2"><input type="number" id="edit-re-official" value="${x.official}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs text-right outline-none focus:ring-2 focus:ring-blue-500"></td>
                             <td class="py-2 pr-2"><input type="number" id="edit-re-market" value="${x.market}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs text-right outline-none focus:ring-2 focus:ring-blue-500"></td>
                             <td class="py-3 text-right whitespace-nowrap">
-                                <button onclick="saveEditItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-full text-emerald-600 hover:text-emerald-700" title="저장">
+                                <button onclick="saveEditItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-md text-emerald-600 hover:text-emerald-700" title="저장">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                 </button>
-                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-400 hover:text-slate-600" title="취소">
+                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md text-slate-400 hover:text-slate-600" title="취소">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                                 </button>
                             </td>
@@ -1337,10 +1352,10 @@
                             <td class="py-3 text-right font-mono text-slate-500">${formatKRW(x.official)}</td>
                             <td class="py-3 text-right font-mono font-bold text-slate-800 dark:text-slate-200">${formatKRW(x.market)}</td>
                             <td class="py-3 text-right whitespace-nowrap">
-                                <button onclick="startEditItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-full text-blue-500 hover:text-blue-600" title="수정">
+                                <button onclick="startEditItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-md text-blue-500 hover:text-blue-600" title="수정">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                 </button>
-                                <button onclick="removeItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-full text-rose-500 hover:text-rose-600" title="삭제">
+                                <button onclick="removeItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-md text-rose-500 hover:text-rose-600" title="삭제">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M1 7h22"/></svg>
                                 </button>
                             </td>
@@ -1371,10 +1386,10 @@
                             </td>
                             <td class="py-2 pr-2"><input type="number" id="edit-fin-value" value="${x.value}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs text-right outline-none focus:ring-2 focus:ring-blue-500"></td>
                             <td class="py-3 text-right whitespace-nowrap">
-                                <button onclick="saveEditItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-full text-emerald-600 hover:text-emerald-700" title="저장">
+                                <button onclick="saveEditItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-md text-emerald-600 hover:text-emerald-700" title="저장">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                 </button>
-                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-400 hover:text-slate-600" title="취소">
+                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md text-slate-400 hover:text-slate-600" title="취소">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                                 </button>
                             </td>
@@ -1390,10 +1405,10 @@
                             </td>
                             <td class="py-3 text-right font-mono font-bold text-slate-800 dark:text-slate-200">${formatKRW(x.value)}</td>
                             <td class="py-3 text-right whitespace-nowrap">
-                                <button onclick="startEditItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-full text-blue-500 hover:text-blue-600" title="수정">
+                                <button onclick="startEditItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-md text-blue-500 hover:text-blue-600" title="수정">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                 </button>
-                                <button onclick="removeItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-full text-rose-500 hover:text-rose-600" title="삭제">
+                                <button onclick="removeItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-md text-rose-500 hover:text-rose-600" title="삭제">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M1 7h22"/></svg>
                                 </button>
                             </td>
@@ -1418,10 +1433,10 @@
                             <td class="py-2 pr-2"><input type="text" id="edit-debt-label" value="${escapeAttr(x.label)}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs outline-none focus:ring-2 focus:ring-blue-500"></td>
                             <td class="py-2 pr-2"><input type="number" id="edit-debt-value" value="${x.value}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs text-right outline-none focus:ring-2 focus:ring-blue-500"></td>
                             <td class="py-3 text-right whitespace-nowrap">
-                                <button onclick="saveEditItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-full text-emerald-600 hover:text-emerald-700" title="저장">
+                                <button onclick="saveEditItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-md text-emerald-600 hover:text-emerald-700" title="저장">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                 </button>
-                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-400 hover:text-slate-600" title="취소">
+                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md text-slate-400 hover:text-slate-600" title="취소">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                                 </button>
                             </td>
@@ -1432,10 +1447,10 @@
                             <td class="py-3 font-semibold text-slate-700 dark:text-slate-300">${x.label}</td>
                             <td class="py-3 text-right font-mono font-bold text-rose-600">${formatKRW(x.value)}</td>
                             <td class="py-3 text-right whitespace-nowrap">
-                                <button onclick="startEditItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-full text-blue-500 hover:text-blue-600" title="수정">
+                                <button onclick="startEditItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-md text-blue-500 hover:text-blue-600" title="수정">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                 </button>
-                                <button onclick="removeItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-full text-rose-500 hover:text-rose-600" title="삭제">
+                                <button onclick="removeItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-md text-rose-500 hover:text-rose-600" title="삭제">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M1 7h22"/></svg>
                                 </button>
                             </td>
@@ -1918,7 +1933,7 @@
                     labels: ['부동산', '현금/예적금', '주식/증권', '부채'],
                     datasets: [{
                         data: [0, 0, 0, 0],
-                        backgroundColor: ['#00d564', '#a6acb2', '#00a854', '#d42a2a'],
+                        backgroundColor: ['#01b8aa', '#f2c80f', '#5f6b6d', '#fd625e'],
                         hoverOffset: 8,
                         borderWidth: 0
                     }]
@@ -1950,7 +1965,7 @@
                     datasets: [{
                         label: '순자산',
                         data: [],
-                        backgroundColor: '#00d564',
+                        backgroundColor: '#01b8aa',
                         borderRadius: 8,
                         maxBarThickness: 32
                     }]
@@ -2014,7 +2029,7 @@
             
             // Bar color custom gradients (optional, using default background for simplicity)
             barChart.data.datasets[0].backgroundColor = family.map((m, idx) => {
-                const colors = ['#00d564', '#7a8189', '#d42a2a', '#00a854', '#a6acb2'];
+                const colors = ['#01b8aa', '#f2c80f', '#fd625e', '#5f6b6d', '#8ad4eb'];
                 return colors[idx % colors.length];
             });
             
