@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -16,44 +16,44 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        display: ['"Playfair Display"', 'Pretendard', 'sans-serif'],
+                        display: ['Pretendard', 'sans-serif'],
                     },
                     colors: {
-                        /* Ivory & Bronze — light luxury palette */
+                        /* WEBTOONS-style identity: signature green + ink black + white/gray */
                         brand: {
-                            50: '#faf6ef', 100: '#f3ead9', 200: '#e8d6b4', 300: '#d9bd87',
-                            400: '#c6a05f', 500: '#ac8340', 600: '#8a6a3a', 700: '#6f552f',
-                            800: '#594527', 900: '#47371f', 950: '#2b2115',
+                            50: '#eaf8f1', 100: '#cff3e1', 200: '#9fe8c4', 300: '#62d8a0',
+                            400: '#2dce86', 500: '#0edb70', 600: '#00d564', 700: '#00a854',
+                            800: '#00873f', 900: '#076b34', 950: '#0a5129',
                         },
-                        /* Primary accent (replaces default blue) */
+                        /* Primary accent — signature webtoon green (replaces default blue) */
                         blue: {
-                            50: '#faf6ef', 100: '#f3ead9', 200: '#e8d6b4', 300: '#d9bd87',
-                            400: '#c6a05f', 500: '#ac8340', 600: '#8a6a3a', 700: '#6f552f',
-                            800: '#594527', 900: '#47371f', 950: '#2b2115',
+                            50: '#eaf8f1', 100: '#cff3e1', 200: '#9fe8c4', 300: '#62d8a0',
+                            400: '#2dce86', 500: '#0edb70', 600: '#00d564', 700: '#00a854',
+                            800: '#00873f', 900: '#076b34', 950: '#0a5129',
                         },
-                        /* Deep chocolate accent (replaces default indigo, used in dark gradients) */
+                        /* Ink black secondary accent (replaces default indigo) */
                         indigo: {
-                            50: '#f6f1ec', 100: '#e7dacb', 200: '#cdb08a', 300: '#ac8a61',
-                            400: '#8a6c4b', 500: '#6c5138', 600: '#543e2b', 700: '#423020',
-                            800: '#302319', 900: '#201810', 950: '#130e0a',
+                            50: '#f2f3f4', 100: '#e4e6e8', 200: '#c9cdd1', 300: '#a6acb2',
+                            400: '#7a8189', 500: '#595e65', 600: '#4a4f55', 700: '#383c41',
+                            800: '#26292d', 900: '#17191c', 950: '#0a0b0c',
                         },
-                        /* Warm ivory/stone neutral (replaces default slate) */
+                        /* Cool neutral gray (replaces default slate) */
                         slate: {
-                            50: '#faf7f2', 100: '#f4efe6', 200: '#e8e0d2', 300: '#d6cab4',
-                            400: '#b3a288', 500: '#8a7b64', 600: '#6b5f4d', 700: '#52483a',
-                            800: '#362f26', 900: '#241f19', 950: '#17130f',
+                            50: '#f8f9fa', 100: '#f0f1f2', 200: '#e3e5e7', 300: '#c9cdd1',
+                            400: '#a6acb2', 500: '#7a8189', 600: '#595e65', 700: '#42474d',
+                            800: '#292c30', 900: '#17191c', 950: '#0d0e10',
                         },
-                        /* Garnet negative/debt semantic (replaces default rose) */
+                        /* Debt/negative semantic — clean flat red */
                         rose: {
-                            50: '#fbf1ef', 100: '#f3dad3', 200: '#e4b3a6', 300: '#d08972',
-                            400: '#b7614a', 500: '#9c4630', 600: '#833823', 700: '#692c1b',
-                            800: '#522215', 900: '#3d190f', 950: '#26100a',
+                            50: '#fef2f2', 100: '#fde2e2', 200: '#fbc5c5', 300: '#f79999',
+                            400: '#f16565', 500: '#e83e3e', 600: '#d42a2a', 700: '#b01f1f',
+                            800: '#911d1d', 900: '#791c1c', 950: '#420b0b',
                         },
-                        /* Forest green positive semantic (replaces default emerald) */
+                        /* Positive/success semantic — same signature green family */
                         emerald: {
-                            50: '#f3f5ec', 100: '#e2e8d1', 200: '#c4d2a4', 300: '#a1b876',
-                            400: '#7c9752', 500: '#5e7a3d', 600: '#4b6430', 700: '#3a4e26',
-                            800: '#2c3c1d', 900: '#202d15', 950: '#12190c',
+                            50: '#eaf8f1', 100: '#cff3e1', 200: '#9fe8c4', 300: '#62d8a0',
+                            400: '#2dce86', 500: '#0edb70', 600: '#00a854', 700: '#00873f',
+                            800: '#076b34', 900: '#0a5129', 950: '#053018',
                         },
                     },
                     animation: {
@@ -82,29 +82,29 @@
     <style>
         body {
             font-family: 'Pretendard', sans-serif;
-            background-color: #faf7f2;
+            background-color: #ffffff;
             transition: background-color 0.3s, color 0.3s;
         }
         .dark body {
-            background-color: #1c1710;
-            color: #ece4d6;
+            background-color: #121315;
+            color: #f0f1f2;
         }
-        .font-display { font-family: '"Playfair Display"', 'Pretendard', sans-serif; letter-spacing: 0.01em; }
+        .font-display { font-family: 'Pretendard', sans-serif; font-weight: 900; letter-spacing: -0.02em; }
         .chart-container { position: relative; height: 280px; width: 100%; }
         input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-        /* Glassmorphism scrollbar */
+        /* Flat scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb {
-            background: #d6cab4;
+            background: #c9cdd1;
             border-radius: 999px;
         }
         .dark ::-webkit-scrollbar-thumb {
-            background: #52483a;
+            background: #42474d;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #b3a288;
+            background: #a6acb2;
         }
 
         /* Print Media Stylesheet */
@@ -114,9 +114,9 @@
             main { max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
             .grid { display: block !important; }
             .chart-container { height: 200px !important; page-break-inside: avoid; }
-            .bg-white, .dark .bg-slate-900, .bg-slate-50, .dark .bg-slate-950 { background: transparent !important; border: 1px solid #e8e0d2 !important; box-shadow: none !important; }
+            .bg-white, .dark .bg-slate-900, .bg-slate-50, .dark .bg-slate-950 { background: transparent !important; border: 1px solid #e3e5e7 !important; box-shadow: none !important; }
             .text-white { color: black !important; }
-            .bg-blue-900, .bg-slate-900 { background: #f4efe6 !important; color: black !important; }
+            .bg-blue-900, .bg-slate-900 { background: #f0f1f2 !important; color: black !important; }
             h2, h3, h4 { color: black !important; page-break-after: avoid; }
             section { page-break-inside: avoid; margin-bottom: 2rem !important; }
         }
@@ -125,10 +125,10 @@
 <body class="text-slate-800 dark:text-slate-200 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
     <!-- Header -->
-    <header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800/80 sticky top-0 z-50 transition-all">
+    <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-md shadow-blue-500/20 text-white font-extrabold text-xl">
+                <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center shadow-md shadow-blue-500/20 text-white font-extrabold text-xl">
                     👑
                 </div>
                 <div>
@@ -140,22 +140,22 @@
             </div>
             
             <div class="flex items-center gap-2 md:gap-3">
-                <button onclick="loadSampleData()" class="px-3 py-1.5 rounded-lg text-xs font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 border border-blue-200/50 dark:border-blue-900/40 transition-all flex items-center gap-1.5" title="분석 데모용 가계 데이터를 불러옵니다">
+                <button onclick="loadSampleData()" class="px-3 py-1.5 rounded-full text-xs font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 border border-blue-200/50 dark:border-blue-900/40 transition-all flex items-center gap-1.5" title="분석 데모용 가계 데이터를 불러옵니다">
                     📊 샘플 데이터
                 </button>
-                <button onclick="openExportModal()" class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors" title="데이터 가져오기/내보내기">
+                <button onclick="openExportModal()" class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors" title="데이터 가져오기/내보내기">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
                 </button>
-                <button onclick="window.print()" class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors" title="리포트 인쇄 / PDF 저장">
+                <button onclick="window.print()" class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors" title="리포트 인쇄 / PDF 저장">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4"/></svg>
                 </button>
-                <button onclick="toggleTheme()" class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors" id="theme-toggle" title="테마 전환">
+                <button onclick="toggleTheme()" class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors" id="theme-toggle" title="테마 전환">
                     <!-- Sun icon -->
                     <svg class="w-4 h-4 hidden dark:block text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 14.05a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zm-.707-8.485a1 1 0 011.414-1.414l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/></svg>
                     <!-- Moon icon -->
                     <svg class="w-4 h-4 block dark:hidden text-slate-600" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
                 </button>
-                <button onclick="confirmReset()" class="text-xs text-rose-500 hover:text-rose-600 dark:text-rose-400 font-semibold px-2.5 py-1.5 rounded-lg hover:bg-rose-500/10 transition-colors" title="데이터 초기화">초기화</button>
+                <button onclick="confirmReset()" class="text-xs text-rose-500 hover:text-rose-600 dark:text-rose-400 font-semibold px-2.5 py-1.5 rounded-full hover:bg-rose-500/10 transition-colors" title="데이터 초기화">초기화</button>
             </div>
         </div>
     </header>
@@ -167,7 +167,7 @@
             <!-- Left: Sidebar & Family List (col-span-4) -->
             <aside class="lg:col-span-4 space-y-6">
                 <!-- Family Card -->
-                <div class="bg-white/85 dark:bg-slate-900/85 border border-slate-200/60 dark:border-slate-800/80 rounded-3xl shadow-sm p-6 backdrop-blur-md">
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm p-6">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="font-display text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                             👨‍👩‍👧‍👦 가문 구성원 <span id="member-count" class="text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-2 py-0.5 rounded-full">0명</span>
@@ -178,39 +178,39 @@
                         <!-- Members injected here -->
                     </div>
                     
-                    <button onclick="openAddMemberModal()" class="w-full py-3.5 border-2 border-dashed border-slate-200 hover:border-brand-500 dark:border-slate-800 dark:hover:border-brand-500/50 rounded-2xl text-slate-500 dark:text-slate-400 font-bold hover:text-brand-600 dark:hover:text-brand-400 transition-all flex items-center justify-center gap-2 bg-slate-50/50 dark:bg-slate-950/20">
+                    <button onclick="openAddMemberModal()" class="w-full py-3.5 border-2 border-dashed border-slate-200 hover:border-brand-500 dark:border-slate-800 dark:hover:border-brand-500/50 rounded-full text-slate-500 dark:text-slate-400 font-bold hover:text-brand-600 dark:hover:text-brand-400 transition-all flex items-center justify-center gap-2 bg-slate-50/50 dark:bg-slate-950/20">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                         구성원 추가하기
                     </button>
                 </div>
 
                 <!-- Premium Summary Card -->
-                <div class="bg-gradient-to-br from-blue-900 to-indigo-950 dark:from-brand-950 dark:to-slate-950 rounded-3xl shadow-xl p-6 text-white border border-blue-800/40 dark:border-slate-800 relative overflow-hidden group">
-                    <div class="absolute -right-16 -top-16 w-44 h-44 rounded-full bg-blue-500/10 blur-3xl group-hover:scale-125 transition-transform duration-500"></div>
+                <div class="bg-blue-600 dark:bg-blue-600 rounded-3xl shadow-xl p-6 text-white border border-blue-700 relative overflow-hidden group">
+                    <div class="absolute -right-16 -top-16 w-44 h-44 rounded-full bg-white/10 blur-3xl group-hover:scale-125 transition-transform duration-500"></div>
                     <div class="relative z-10">
-                        <h3 class="text-blue-200 text-xs font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                        <h3 class="text-white/80 text-xs font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
                             👑 가문 총 순자산
                         </h3>
-                        <p id="family-total-net" class="font-display text-3xl font-bold tracking-tight mb-5 text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">0원</p>
-                        
-                        <div class="space-y-3 text-sm border-t border-white/10 pt-4">
+                        <p id="family-total-net" class="font-display text-3xl font-black tracking-tight mb-5 text-white">0원</p>
+
+                        <div class="space-y-3 text-sm border-t border-white/20 pt-4">
                             <div class="flex justify-between items-center">
-                                <span class="text-blue-200/80 flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-blue-400"></span>총 부동산 (시세)
-                                </span> 
+                                <span class="text-white/70 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>총 부동산 (시세)
+                                </span>
                                 <span id="total-re-val" class="font-bold">0원</span>
                             </div>
                             <div class="flex justify-between items-center">
-                                <span class="text-blue-200/80 flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-indigo-400"></span>총 금융자산
-                                </span> 
+                                <span class="text-white/70 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-indigo-900"></span>총 금융자산
+                                </span>
                                 <span id="total-fin-val" class="font-bold">0원</span>
                             </div>
-                            <div class="flex justify-between items-center border-t border-white/5 pt-2.5">
-                                <span class="text-rose-300 flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-rose-400"></span>총 부채
-                                </span> 
-                                <span id="total-debt-val" class="font-bold text-rose-300">0원</span>
+                            <div class="flex justify-between items-center border-t border-white/10 pt-2.5">
+                                <span class="text-rose-200 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-rose-300"></span>총 부채
+                                </span>
+                                <span id="total-debt-val" class="font-bold text-rose-200">0원</span>
                             </div>
                         </div>
                     </div>
@@ -221,10 +221,10 @@
             <div class="lg:col-span-8 space-y-8">
                 
                 <!-- Section 1: Itemized Asset Editor (Dynamic accordion style) -->
-                <section id="input-section" class="bg-white/85 dark:bg-slate-900/85 border border-slate-200/60 dark:border-slate-800/80 rounded-3xl shadow-sm p-6 backdrop-blur-md hidden animate-slide-up">
+                <section id="input-section" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm p-6 hidden animate-slide-up">
                     <div class="flex justify-between items-center mb-6">
                         <div class="flex items-center gap-3">
-                            <span class="p-2 bg-blue-50 dark:bg-blue-950/40 rounded-xl text-blue-600 dark:text-blue-400">
+                            <span class="p-2 bg-blue-50 dark:bg-blue-950/40 rounded-full text-blue-600 dark:text-blue-400">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                             </span>
                             <div>
@@ -232,7 +232,7 @@
                                 <p class="text-xs text-slate-500 mt-0.5">상세 항목 입력 시 모든 대시보드와 보고서에 실시간 반영 및 자동 저장됩니다.</p>
                             </div>
                         </div>
-                        <button onclick="closeInputSection()" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-slate-600 transition-colors">
+                        <button onclick="closeInputSection()" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-400 hover:text-slate-600 transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                         </button>
                     </div>
@@ -304,7 +304,7 @@
                                     <label class="text-[10px] font-bold text-slate-400 mb-1 block">실거래 시세 (원)</label>
                                     <input type="number" id="add-re-market" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs outline-none focus:ring-2 focus:ring-blue-500" placeholder="0">
                                 </div>
-                                <button onclick="addItemizedAsset('re')" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-1 shrink-0">
+                                <button onclick="addItemizedAsset('re')" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-4 rounded-full flex items-center justify-center gap-1 shrink-0">
                                     <span>+</span> 추가
                                 </button>
                             </div>
@@ -344,7 +344,7 @@
                                     <label class="text-[10px] font-bold text-slate-400 mb-1 block">자산 평가액 (원)</label>
                                     <input type="number" id="add-fin-value" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs outline-none focus:ring-2 focus:ring-blue-500" placeholder="0">
                                 </div>
-                                <button onclick="addItemizedAsset('fin')" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-1 shrink-0">
+                                <button onclick="addItemizedAsset('fin')" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-4 rounded-full flex items-center justify-center gap-1 shrink-0">
                                     <span>+</span> 추가
                                 </button>
                             </div>
@@ -376,7 +376,7 @@
                                     <label class="text-[10px] font-bold text-slate-400 mb-1 block">부채 금액 (원)</label>
                                     <input type="number" id="add-debt-value" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs outline-none focus:ring-2 focus:ring-rose-500 text-rose-600" placeholder="0">
                                 </div>
-                                <button onclick="addItemizedAsset('debt')" class="w-full md:w-auto bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-1 shrink-0">
+                                <button onclick="addItemizedAsset('debt')" class="w-full md:w-auto bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs py-3 px-4 rounded-full flex items-center justify-center gap-1 shrink-0">
                                     <span>+</span> 추가
                                 </button>
                             </div>
@@ -386,10 +386,10 @@
 
                     <!-- Close & Delete Member Area -->
                     <div class="mt-8 pt-5 border-t border-slate-100 dark:border-slate-800/60 flex justify-between gap-3">
-                        <button onclick="closeInputSection()" class="px-5 py-2.5 text-xs font-bold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-xl transition-all">
+                        <button onclick="closeInputSection()" class="px-5 py-2.5 text-xs font-bold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-full transition-all">
                             닫기
                         </button>
-                        <button onclick="deleteMember()" class="px-4 py-2.5 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-900/30 text-rose-600 dark:text-rose-400 text-xs font-bold rounded-xl transition-all">
+                        <button onclick="deleteMember()" class="px-4 py-2.5 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-900/30 text-rose-600 dark:text-rose-400 text-xs font-bold rounded-full transition-all">
                             이 구성원 삭제
                         </button>
                     </div>
@@ -398,7 +398,7 @@
                 <!-- Section 2: Dashboard & Charts -->
                 <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Chart Card 1 -->
-                    <div class="bg-white/85 dark:bg-slate-900/85 border border-slate-200/60 dark:border-slate-800/80 rounded-3xl shadow-sm p-6 backdrop-blur-md relative overflow-hidden">
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm p-6 relative overflow-hidden">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="font-extrabold text-sm text-slate-900 dark:text-white flex items-center gap-2">
                                 <span class="w-1.5 h-3 bg-blue-500 rounded-full"></span>📊 가문 통합 자산 비중
@@ -410,7 +410,7 @@
                         </div>
                     </div>
                     <!-- Chart Card 2 -->
-                    <div class="bg-white/85 dark:bg-slate-900/85 border border-slate-200/60 dark:border-slate-800/80 rounded-3xl shadow-sm p-6 backdrop-blur-md relative overflow-hidden">
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm p-6 relative overflow-hidden">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="font-extrabold text-sm text-slate-900 dark:text-white flex items-center gap-2">
                                 <span class="w-1.5 h-3 bg-indigo-500 rounded-full"></span>👨‍👩‍👧 구성원별 순자산 비교
@@ -424,7 +424,7 @@
                 </section>
 
                 <!-- Section 3: Premium Tax Simulator -->
-                <section class="bg-white/85 dark:bg-slate-900/85 border border-slate-200/60 dark:border-slate-800/80 rounded-3xl shadow-md overflow-hidden backdrop-blur-md">
+                <section class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-md overflow-hidden">
                     <!-- Tax Section Header -->
                     <div class="bg-slate-900 dark:bg-slate-950 p-6 text-white border-b border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div>
@@ -436,8 +436,8 @@
                         <!-- Evaluation Basis Toggle (Korea Specific) -->
                         <div class="flex items-center gap-2 bg-slate-800/70 p-1 rounded-xl text-xs border border-slate-700/60 no-print">
                             <span class="text-[10px] text-slate-400 px-1 font-bold">부동산 평가:</span>
-                            <button onclick="setAppraisalBasis('official')" id="btn-basis-off" class="px-2.5 py-1 rounded-lg font-bold text-[10px] bg-slate-900 text-blue-400 border border-slate-700/80 shadow">공시지가</button>
-                            <button onclick="setAppraisalBasis('market')" id="btn-basis-mkt" class="px-2.5 py-1 rounded-lg font-bold text-[10px] text-slate-400">실거래가</button>
+                            <button onclick="setAppraisalBasis('official')" id="btn-basis-off" class="px-2.5 py-1 rounded-full font-bold text-[10px] bg-slate-900 text-blue-400 border border-slate-700/80 shadow">공시지가</button>
+                            <button onclick="setAppraisalBasis('market')" id="btn-basis-mkt" class="px-2.5 py-1 rounded-full font-bold text-[10px] text-slate-400">실거래가</button>
                         </div>
                     </div>
                     
@@ -453,8 +453,8 @@
                             <div>
                                 <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-2">솔루션 종류</label>
                                 <div class="flex p-1 bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-200/40 dark:border-slate-850">
-                                    <button onclick="setTaxType('inheritance')" id="btn-type-inh" class="flex-1 py-2 rounded-lg font-extrabold text-xs transition-all bg-white dark:bg-slate-900 shadow text-blue-600 dark:text-blue-400">상속세 모의</button>
-                                    <button onclick="setTaxType('gift')" id="btn-type-gift" class="flex-1 py-2 rounded-lg font-bold text-xs transition-all text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">증여세 모의</button>
+                                    <button onclick="setTaxType('inheritance')" id="btn-type-inh" class="flex-1 py-2 rounded-full font-extrabold text-xs transition-all bg-white dark:bg-slate-900 shadow text-blue-600 dark:text-blue-400">상속세 모의</button>
+                                    <button onclick="setTaxType('gift')" id="btn-type-gift" class="flex-1 py-2 rounded-full font-bold text-xs transition-all text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">증여세 모의</button>
                                 </div>
                             </div>
                             <div id="gift-target-box" class="invisible">
@@ -561,8 +561,8 @@
                 </div>
             </div>
             <div class="mt-8 flex gap-3">
-                <button onclick="closeAddMemberModal()" class="flex-1 py-3.5 text-slate-500 dark:text-slate-400 font-bold hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors text-sm">취소</button>
-                <button onclick="addMember()" class="flex-[2] py-3.5 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-500/10 transition-all text-sm">구성원 등록</button>
+                <button onclick="closeAddMemberModal()" class="flex-1 py-3.5 text-slate-500 dark:text-slate-400 font-bold hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors text-sm">취소</button>
+                <button onclick="addMember()" class="flex-[2] py-3.5 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 shadow-lg shadow-blue-500/10 transition-all text-sm">구성원 등록</button>
             </div>
         </div>
     </div>
@@ -573,8 +573,8 @@
             <h3 class="text-base font-extrabold text-slate-900 dark:text-white mb-2" id="confirm-title">확인</h3>
             <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 leading-relaxed" id="confirm-message">이 작업을 진행하시겠습니까?</p>
             <div class="flex gap-2">
-                <button onclick="closeCustomConfirm()" class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-850 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-colors text-xs">취소</button>
-                <button id="confirm-btn-yes" class="flex-1 py-3 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl transition-all text-xs shadow-lg shadow-rose-600/10">확인</button>
+                <button onclick="closeCustomConfirm()" class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-850 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-full transition-colors text-xs">취소</button>
+                <button id="confirm-btn-yes" class="flex-1 py-3 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-full transition-all text-xs shadow-lg shadow-rose-600/10">확인</button>
             </div>
         </div>
     </div>
@@ -596,8 +596,8 @@
             <input type="file" id="restore-file-input" accept="application/json,.json" class="hidden" onchange="restoreBackupFile(event)">
 
             <div class="flex gap-2">
-                <button onclick="backupDataToFile()" class="flex-1 py-3 bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/40 dark:hover:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-bold rounded-xl text-xs transition-colors">데이터 백업</button>
-                <button onclick="document.getElementById('restore-file-input').click()" class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-blue-500/10">데이터 복원</button>
+                <button onclick="backupDataToFile()" class="flex-1 py-3 bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/40 dark:hover:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-bold rounded-full text-xs transition-colors">데이터 백업</button>
+                <button onclick="document.getElementById('restore-file-input').click()" class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full text-xs transition-all shadow-md shadow-blue-500/10">데이터 복원</button>
             </div>
 
             <div class="my-5 border-t border-slate-200 dark:border-slate-800"></div>
@@ -609,8 +609,8 @@
                 위 백업/복구와는 별개로, 현재 자산 데이터를 이 앱의 <b>index.html 파일 자체</b>의 기본값으로 덮어씁니다. 저장 후에는 터미널에서 git add/commit/push로 반영해야 합니다. (Chrome/Edge 브라우저 필요, 최초 1회 파일 선택 필요)
             </p>
             <div class="flex gap-2 items-center">
-                <button onclick="saveFamilyDataToIndexHtml()" class="flex-1 py-3 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 font-bold rounded-xl text-xs transition-colors">index.html에 저장</button>
-                <button onclick="resetIndexHtmlHandle()" title="다른 index.html 파일 선택" class="px-3 py-3 bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/60 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 font-bold rounded-xl text-xs transition-colors">파일 재선택</button>
+                <button onclick="saveFamilyDataToIndexHtml()" class="flex-1 py-3 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 font-bold rounded-full text-xs transition-colors">index.html에 저장</button>
+                <button onclick="resetIndexHtmlHandle()" title="다른 index.html 파일 선택" class="px-3 py-3 bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/60 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 font-bold rounded-full text-xs transition-colors">파일 재선택</button>
             </div>
         </div>
     </div>
@@ -833,8 +833,8 @@
             }
             
             const toast = document.createElement('div');
-            toast.className = `p-4 rounded-2xl shadow-xl border backdrop-blur-md flex items-center gap-3 transform translate-y-2 opacity-0 transition-all duration-300 pointer-events-auto ${
-                type === 'success' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-800 dark:text-emerald-300' :
+            toast.className = `p-4 rounded-2xl shadow-xl border flex items-center gap-3 transform translate-y-2 opacity-0 transition-all duration-300 pointer-events-auto ${
+               type === 'success' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-800 dark:text-emerald-300' :
                 type === 'error' ? 'bg-rose-500/10 border-rose-500/20 text-rose-800 dark:text-rose-300' :
                 'bg-blue-500/10 border-blue-500/20 text-blue-800 dark:text-blue-300'
             }`;
@@ -1099,9 +1099,9 @@
         function getThemeColors() {
             const isDark = document.documentElement.classList.contains('dark');
             return {
-                text: isDark ? '#b3a288' : '#6b5f4d',
-                grid: isDark ? '#362f26' : '#f4efe6',
-                labels: isDark ? '#e8e0d2' : '#362f26'
+                text: isDark ? '#a6acb2' : '#595e65',
+                grid: isDark ? '#292c30' : '#f0f1f2',
+                labels: isDark ? '#e3e5e7' : '#292c30'
             };
         }
 
@@ -1322,10 +1322,10 @@
                             <td class="py-2 pr-2"><input type="number" id="edit-re-official" value="${x.official}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs text-right outline-none focus:ring-2 focus:ring-blue-500"></td>
                             <td class="py-2 pr-2"><input type="number" id="edit-re-market" value="${x.market}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs text-right outline-none focus:ring-2 focus:ring-blue-500"></td>
                             <td class="py-3 text-right whitespace-nowrap">
-                                <button onclick="saveEditItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded text-emerald-600 hover:text-emerald-700" title="저장">
+                                <button onclick="saveEditItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-full text-emerald-600 hover:text-emerald-700" title="저장">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                 </button>
-                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400 hover:text-slate-600" title="취소">
+                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-400 hover:text-slate-600" title="취소">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                                 </button>
                             </td>
@@ -1337,10 +1337,10 @@
                             <td class="py-3 text-right font-mono text-slate-500">${formatKRW(x.official)}</td>
                             <td class="py-3 text-right font-mono font-bold text-slate-800 dark:text-slate-200">${formatKRW(x.market)}</td>
                             <td class="py-3 text-right whitespace-nowrap">
-                                <button onclick="startEditItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded text-blue-500 hover:text-blue-600" title="수정">
+                                <button onclick="startEditItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-full text-blue-500 hover:text-blue-600" title="수정">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                 </button>
-                                <button onclick="removeItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded text-rose-500 hover:text-rose-600" title="삭제">
+                                <button onclick="removeItemizedAsset('re', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-full text-rose-500 hover:text-rose-600" title="삭제">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M1 7h22"/></svg>
                                 </button>
                             </td>
@@ -1371,10 +1371,10 @@
                             </td>
                             <td class="py-2 pr-2"><input type="number" id="edit-fin-value" value="${x.value}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs text-right outline-none focus:ring-2 focus:ring-blue-500"></td>
                             <td class="py-3 text-right whitespace-nowrap">
-                                <button onclick="saveEditItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded text-emerald-600 hover:text-emerald-700" title="저장">
+                                <button onclick="saveEditItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-full text-emerald-600 hover:text-emerald-700" title="저장">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                 </button>
-                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400 hover:text-slate-600" title="취소">
+                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-400 hover:text-slate-600" title="취소">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                                 </button>
                             </td>
@@ -1390,10 +1390,10 @@
                             </td>
                             <td class="py-3 text-right font-mono font-bold text-slate-800 dark:text-slate-200">${formatKRW(x.value)}</td>
                             <td class="py-3 text-right whitespace-nowrap">
-                                <button onclick="startEditItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded text-blue-500 hover:text-blue-600" title="수정">
+                                <button onclick="startEditItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-full text-blue-500 hover:text-blue-600" title="수정">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                 </button>
-                                <button onclick="removeItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded text-rose-500 hover:text-rose-600" title="삭제">
+                                <button onclick="removeItemizedAsset('fin', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-full text-rose-500 hover:text-rose-600" title="삭제">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M1 7h22"/></svg>
                                 </button>
                             </td>
@@ -1418,10 +1418,10 @@
                             <td class="py-2 pr-2"><input type="text" id="edit-debt-label" value="${escapeAttr(x.label)}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs outline-none focus:ring-2 focus:ring-blue-500"></td>
                             <td class="py-2 pr-2"><input type="number" id="edit-debt-value" value="${x.value}" class="w-full bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 rounded-lg p-2 text-xs text-right outline-none focus:ring-2 focus:ring-blue-500"></td>
                             <td class="py-3 text-right whitespace-nowrap">
-                                <button onclick="saveEditItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded text-emerald-600 hover:text-emerald-700" title="저장">
+                                <button onclick="saveEditItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-full text-emerald-600 hover:text-emerald-700" title="저장">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                 </button>
-                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400 hover:text-slate-600" title="취소">
+                                <button onclick="cancelEditItemizedAsset()" class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-400 hover:text-slate-600" title="취소">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                                 </button>
                             </td>
@@ -1432,10 +1432,10 @@
                             <td class="py-3 font-semibold text-slate-700 dark:text-slate-300">${x.label}</td>
                             <td class="py-3 text-right font-mono font-bold text-rose-600">${formatKRW(x.value)}</td>
                             <td class="py-3 text-right whitespace-nowrap">
-                                <button onclick="startEditItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded text-blue-500 hover:text-blue-600" title="수정">
+                                <button onclick="startEditItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-full text-blue-500 hover:text-blue-600" title="수정">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                 </button>
-                                <button onclick="removeItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded text-rose-500 hover:text-rose-600" title="삭제">
+                                <button onclick="removeItemizedAsset('debt', '${x.id}')" class="p-1 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-full text-rose-500 hover:text-rose-600" title="삭제">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M1 7h22"/></svg>
                                 </button>
                             </td>
@@ -1918,7 +1918,7 @@
                     labels: ['부동산', '현금/예적금', '주식/증권', '부채'],
                     datasets: [{
                         data: [0, 0, 0, 0],
-                        backgroundColor: ['#8a6a3a', '#4b6430', '#b8842b', '#833823'],
+                        backgroundColor: ['#00d564', '#a6acb2', '#00a854', '#d42a2a'],
                         hoverOffset: 8,
                         borderWidth: 0
                     }]
@@ -1950,7 +1950,7 @@
                     datasets: [{
                         label: '순자산',
                         data: [],
-                        backgroundColor: '#8a6a3a',
+                        backgroundColor: '#00d564',
                         borderRadius: 8,
                         maxBarThickness: 32
                     }]
@@ -2014,7 +2014,7 @@
             
             // Bar color custom gradients (optional, using default background for simplicity)
             barChart.data.datasets[0].backgroundColor = family.map((m, idx) => {
-                const colors = ['#8a6a3a', '#4b6430', '#833823', '#6c5138', '#b8842b'];
+                const colors = ['#00d564', '#7a8189', '#d42a2a', '#00a854', '#a6acb2'];
                 return colors[idx % colors.length];
             });
             
