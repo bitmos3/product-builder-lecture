@@ -8,27 +8,53 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        display: ['"Playfair Display"', 'Pretendard', 'sans-serif'],
+                    },
                     colors: {
+                        /* Ivory & Bronze — light luxury palette */
                         brand: {
-                            50: '#f5f7ff',
-                            100: '#ebf0ff',
-                            200: '#d6e0ff',
-                            300: '#b3c7ff',
-                            400: '#85a5ff',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                            950: '#0f172a',
-                        }
+                            50: '#faf6ef', 100: '#f3ead9', 200: '#e8d6b4', 300: '#d9bd87',
+                            400: '#c6a05f', 500: '#ac8340', 600: '#8a6a3a', 700: '#6f552f',
+                            800: '#594527', 900: '#47371f', 950: '#2b2115',
+                        },
+                        /* Primary accent (replaces default blue) */
+                        blue: {
+                            50: '#faf6ef', 100: '#f3ead9', 200: '#e8d6b4', 300: '#d9bd87',
+                            400: '#c6a05f', 500: '#ac8340', 600: '#8a6a3a', 700: '#6f552f',
+                            800: '#594527', 900: '#47371f', 950: '#2b2115',
+                        },
+                        /* Deep chocolate accent (replaces default indigo, used in dark gradients) */
+                        indigo: {
+                            50: '#f6f1ec', 100: '#e7dacb', 200: '#cdb08a', 300: '#ac8a61',
+                            400: '#8a6c4b', 500: '#6c5138', 600: '#543e2b', 700: '#423020',
+                            800: '#302319', 900: '#201810', 950: '#130e0a',
+                        },
+                        /* Warm ivory/stone neutral (replaces default slate) */
+                        slate: {
+                            50: '#faf7f2', 100: '#f4efe6', 200: '#e8e0d2', 300: '#d6cab4',
+                            400: '#b3a288', 500: '#8a7b64', 600: '#6b5f4d', 700: '#52483a',
+                            800: '#362f26', 900: '#241f19', 950: '#17130f',
+                        },
+                        /* Garnet negative/debt semantic (replaces default rose) */
+                        rose: {
+                            50: '#fbf1ef', 100: '#f3dad3', 200: '#e4b3a6', 300: '#d08972',
+                            400: '#b7614a', 500: '#9c4630', 600: '#833823', 700: '#692c1b',
+                            800: '#522215', 900: '#3d190f', 950: '#26100a',
+                        },
+                        /* Forest green positive semantic (replaces default emerald) */
+                        emerald: {
+                            50: '#f3f5ec', 100: '#e2e8d1', 200: '#c4d2a4', 300: '#a1b876',
+                            400: '#7c9752', 500: '#5e7a3d', 600: '#4b6430', 700: '#3a4e26',
+                            800: '#2c3c1d', 900: '#202d15', 950: '#12190c',
+                        },
                     },
                     animation: {
                         'pulse-subtle': 'pulseSubtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -54,30 +80,31 @@
         }
     </script>
     <style>
-        body { 
-            font-family: 'Pretendard', sans-serif; 
-            background-color: #f8fafc;
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #faf7f2;
             transition: background-color 0.3s, color 0.3s;
         }
         .dark body {
-            background-color: #0b0f19;
-            color: #f1f5f9;
+            background-color: #1c1710;
+            color: #ece4d6;
         }
+        .font-display { font-family: '"Playfair Display"', 'Pretendard', sans-serif; letter-spacing: 0.01em; }
         .chart-container { position: relative; height: 280px; width: 100%; }
         input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-        
+
         /* Glassmorphism scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { 
-            background: #cbd5e1; 
-            border-radius: 999px; 
+        ::-webkit-scrollbar-thumb {
+            background: #d6cab4;
+            border-radius: 999px;
         }
-        .dark ::-webkit-scrollbar-thumb { 
-            background: #334155; 
+        .dark ::-webkit-scrollbar-thumb {
+            background: #52483a;
         }
-        ::-webkit-scrollbar-thumb:hover { 
-            background: #94a3b8; 
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b3a288;
         }
 
         /* Print Media Stylesheet */
@@ -87,9 +114,9 @@
             main { max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
             .grid { display: block !important; }
             .chart-container { height: 200px !important; page-break-inside: avoid; }
-            .bg-white, .dark .bg-slate-900, .bg-slate-50, .dark .bg-slate-950 { background: transparent !important; border: 1px solid #e2e8f0 !important; box-shadow: none !important; }
+            .bg-white, .dark .bg-slate-900, .bg-slate-50, .dark .bg-slate-950 { background: transparent !important; border: 1px solid #e8e0d2 !important; box-shadow: none !important; }
             .text-white { color: black !important; }
-            .bg-blue-900, .bg-slate-900 { background: #f1f5f9 !important; color: black !important; }
+            .bg-blue-900, .bg-slate-900 { background: #f4efe6 !important; color: black !important; }
             h2, h3, h4 { color: black !important; page-break-after: avoid; }
             section { page-break-inside: avoid; margin-bottom: 2rem !important; }
         }
@@ -105,9 +132,9 @@
                     👑
                 </div>
                 <div>
-                    <h1 class="text-lg font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
-                        우리가문 자산 시뮬레이터 
-                        <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50 px-2 py-0.5 rounded-full border border-blue-100 dark:border-blue-900">2026 Premium Edition</span>
+                    <h1 class="font-display text-lg font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+                        우리가문 자산 시뮬레이터
+                        <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50 px-2 py-0.5 rounded-full border border-blue-200/70 dark:border-blue-900">2026 Premium Edition</span>
                     </h1>
                 </div>
             </div>
@@ -142,7 +169,7 @@
                 <!-- Family Card -->
                 <div class="bg-white/85 dark:bg-slate-900/85 border border-slate-200/60 dark:border-slate-800/80 rounded-3xl shadow-sm p-6 backdrop-blur-md">
                     <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <h2 class="font-display text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                             👨‍👩‍👧‍👦 가문 구성원 <span id="member-count" class="text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-2 py-0.5 rounded-full">0명</span>
                         </h2>
                     </div>
@@ -164,7 +191,7 @@
                         <h3 class="text-blue-200 text-xs font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
                             👑 가문 총 순자산
                         </h3>
-                        <p id="family-total-net" class="text-3xl font-black tracking-tight mb-5 text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">0원</p>
+                        <p id="family-total-net" class="font-display text-3xl font-bold tracking-tight mb-5 text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">0원</p>
                         
                         <div class="space-y-3 text-sm border-t border-white/10 pt-4">
                             <div class="flex justify-between items-center">
@@ -201,7 +228,7 @@
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                             </span>
                             <div>
-                                <h2 id="edit-title" class="text-xl font-extrabold text-slate-900 dark:text-white">자산 세부 항목 편집</h2>
+                                <h2 id="edit-title" class="font-display text-xl font-bold text-slate-900 dark:text-white">자산 세부 항목 편집</h2>
                                 <p class="text-xs text-slate-500 mt-0.5">상세 항목 입력 시 모든 대시보드와 보고서에 실시간 반영 및 자동 저장됩니다.</p>
                             </div>
                         </div>
@@ -401,7 +428,7 @@
                     <!-- Tax Section Header -->
                     <div class="bg-slate-900 dark:bg-slate-950 p-6 text-white border-b border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div>
-                            <h2 class="text-lg font-black flex items-center gap-2">
+                            <h2 class="font-display text-lg font-bold flex items-center gap-2">
                                 <span class="text-xl">🧮</span> 2026 상속·증여 모의 세금 컨설팅
                             </h2>
                             <p class="text-slate-400 text-xs mt-1">실시간 데이터 연동 및 최적의 절세 제안 리포트를 검토하십시오.</p>
@@ -466,8 +493,8 @@
                                 
                                 <div class="h-4 bg-slate-200 dark:bg-slate-800 rounded-full flex overflow-hidden relative" id="tax-progress-bar">
                                     <div class="h-full bg-emerald-400/80 w-[5%]" title="10% 구간 (1억 이하)"></div>
-                                    <div class="h-full bg-cyan-400/80 w-[15%]" title="20% 구간 (1억~5억)"></div>
-                                    <div class="h-full bg-sky-500/80 w-[20%]" title="30% 구간 (5억~10억)"></div>
+                                    <div class="h-full bg-blue-300/80 w-[15%]" title="20% 구간 (1억~5억)"></div>
+                                    <div class="h-full bg-blue-500/80 w-[20%]" title="30% 구간 (5억~10억)"></div>
                                     <div class="h-full bg-indigo-500/80 w-[30%]" title="40% 구간 (10억~30억)"></div>
                                     <div class="h-full bg-indigo-900/90 w-[30%]" title="50% 구간 (30억 초과)"></div>
                                     
@@ -516,7 +543,7 @@
     <!-- Modal for Adding Member -->
     <div id="add-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center hidden p-4 transition-all duration-300">
         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-md p-8 shadow-2xl scale-95 opacity-0 transition-all duration-300" id="modal-content">
-            <h2 class="text-xl font-extrabold text-slate-900 dark:text-white mb-5">새로운 구성원 추가</h2>
+            <h2 class="font-display text-xl font-bold text-slate-900 dark:text-white mb-5">새로운 구성원 추가</h2>
             <div class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-2">이름 또는 별칭</label>
@@ -556,7 +583,7 @@
     <div id="export-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center hidden p-4 transition-all duration-200">
         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-lg p-6 shadow-2xl scale-95 opacity-0 transition-all duration-200" id="export-content">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                <h3 class="font-display text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     📦 가계 자산 데이터 백업 및 복구
                 </h3>
                 <button onclick="closeExportModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">✕</button>
@@ -575,7 +602,7 @@
 
             <div class="my-5 border-t border-slate-200 dark:border-slate-800"></div>
 
-            <h3 class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2 mb-2">
+            <h3 class="font-display text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">
                 ⚙️ index.html 소스에 기본값으로 저장
             </h3>
             <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
@@ -1072,9 +1099,9 @@
         function getThemeColors() {
             const isDark = document.documentElement.classList.contains('dark');
             return {
-                text: isDark ? '#94a3b8' : '#475569',
-                grid: isDark ? '#1e293b' : '#f1f5f9',
-                labels: isDark ? '#cbd5e1' : '#1e293b'
+                text: isDark ? '#b3a288' : '#6b5f4d',
+                grid: isDark ? '#362f26' : '#f4efe6',
+                labels: isDark ? '#e8e0d2' : '#362f26'
             };
         }
 
@@ -1357,7 +1384,7 @@
                         tr.innerHTML = `
                             <td class="py-3 font-semibold text-slate-700 dark:text-slate-300">${x.label}</td>
                             <td class="py-3">
-                                <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${x.type === 'cash' ? 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600' : 'bg-sky-50 dark:bg-sky-950/50 text-sky-600'}">
+                                <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${x.type === 'cash' ? 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600' : 'bg-blue-50 dark:bg-blue-950/50 text-blue-600'}">
                                     ${x.type === 'cash' ? '현금/예적금' : '주식/증권'}
                                 </span>
                             </td>
@@ -1806,7 +1833,7 @@
                         const recGiftVal = Math.min(600000000, Math.floor(assetDiff / 2));
                         const spouseSavings = recGiftVal * mRate;
                         spouseGiftAdvice = `
-                            <div class="bg-sky-500/5 dark:bg-slate-950 border border-sky-500/20 dark:border-slate-800 p-5 rounded-2xl hover:shadow-md transition-all duration-300">
+                            <div class="bg-blue-500/5 dark:bg-slate-950 border border-blue-500/20 dark:border-slate-800 p-5 rounded-2xl hover:shadow-md transition-all duration-300">
                                 <div class="flex items-start gap-3">
                                     <span class="text-lg">👩‍❤️‍👨</span>
                                     <div>
@@ -1859,7 +1886,7 @@
                         </div>
 
                         <!-- Solution 2: Property Valuation Appraisal -->
-                        <div class="bg-violet-500/5 dark:bg-slate-950 border border-violet-500/20 dark:border-slate-800 p-5 rounded-2xl hover:shadow-md transition-all duration-300">
+                        <div class="bg-indigo-500/5 dark:bg-slate-950 border border-indigo-500/20 dark:border-slate-800 p-5 rounded-2xl hover:shadow-md transition-all duration-300">
                             <div class="flex items-start gap-3">
                                 <span class="text-lg">📈</span>
                                 <div>
@@ -1891,7 +1918,7 @@
                     labels: ['부동산', '현금/예적금', '주식/증권', '부채'],
                     datasets: [{
                         data: [0, 0, 0, 0],
-                        backgroundColor: ['#2563eb', '#10b981', '#06b6d4', '#f43f5e'],
+                        backgroundColor: ['#8a6a3a', '#4b6430', '#b8842b', '#833823'],
                         hoverOffset: 8,
                         borderWidth: 0
                     }]
@@ -1923,7 +1950,7 @@
                     datasets: [{
                         label: '순자산',
                         data: [],
-                        backgroundColor: '#6366f1',
+                        backgroundColor: '#8a6a3a',
                         borderRadius: 8,
                         maxBarThickness: 32
                     }]
@@ -1987,7 +2014,7 @@
             
             // Bar color custom gradients (optional, using default background for simplicity)
             barChart.data.datasets[0].backgroundColor = family.map((m, idx) => {
-                const colors = ['#3b82f6', '#6366f1', '#10b981', '#f59e0b', '#ec4899'];
+                const colors = ['#8a6a3a', '#4b6430', '#833823', '#6c5138', '#b8842b'];
                 return colors[idx % colors.length];
             });
             
